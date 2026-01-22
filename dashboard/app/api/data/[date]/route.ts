@@ -15,7 +15,7 @@ import {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { date: string } }
+  { params }: { params: Promise<{ date: string }> }
 ) {
   try {
     const authenticated = await isAuthenticated();
@@ -23,7 +23,7 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { date } = params;
+    const { date } = await params;
 
     if (!/^\d{8}$/.test(date)) {
       return NextResponse.json(
