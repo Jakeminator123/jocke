@@ -12,7 +12,10 @@ import {
   Calendar,
   Search,
   ChevronRight,
-  FolderArchive
+  FolderArchive,
+  Trash2,
+  AlertTriangle,
+  RefreshCw
 } from "lucide-react";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
@@ -43,6 +46,10 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [adminSecret, setAdminSecret] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -97,6 +104,40 @@ export default function HomePage() {
       link.click();
       document.body.removeChild(link);
       await new Promise(r => setTimeout(r, 500));
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!adminSecret) {
+      alert("Ange admin-lösenord (UPLOAD_SECRET)");
+      return;
+    }
+    
+    setDeleting(true);
+    try {
+      const response = await fetch("/api/admin/clear-data", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${adminSecret}`,
+        },
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        alert(`Raderade ${result.deletedFolders} datamängder`);
+        setDeleteConfirm(false);
+        setAdminSecret("");
+        fetchDates();
+        setStats(null);
+      } else {
+        alert(`Fel: ${result.error || "Kunde inte radera"}`);
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Fel vid radering");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -260,6 +301,78 @@ export default function HomePage() {
           Ingen data hittades. Se till att det finns datamängder i data_bundles/
         </div>
       )}
+
+      {/* Admin Section */}
+      <section className="border-t border-zinc-800 pt-8">
+        <button
+          onClick={() => setShowAdmin(!showAdmin)}
+          className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+        >
+          {showAdmin ? "Dölj admin" : "Visa admin-verktyg"}
+        </button>
+        
+        {showAdmin && (
+          <div className="mt-4 p-6 bg-zinc-900 rounded-lg border border-zinc-800">
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-yellow-500" />
+              Admin-verktyg
+            </h3>
+            
+            <div className="space-y-4">
+              <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
+                <div className="flex-1">
+                  <label className="block text-sm text-zinc-400 mb-1">
+                    Admin-lösenord (UPLOAD_SECRET)
+                  </label>
+                  <input
+                    type="password"
+                    value={adminSecret}
+                    onChange={(e) => setAdminSecret(e.target.value)}
+                    placeholder="Ange lösenord..."
+                    className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-zinc-500"
+                  />
+                </div>
+                
+                {!deleteConfirm ? (
+                  <button
+                    onClick={() => setDeleteConfirm(true)}
+                    disabled={!adminSecret}
+                    className="flex items-center gap-2 px-4 py-2 bg-red-900/50 hover:bg-red-900 text-red-300 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Radera all data
+                  </button>
+                ) : (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleDeleteAll}
+                      disabled={deleting}
+                      className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      {deleting ? (
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="w-4 h-4" />
+                      )}
+                      {deleting ? "Raderar..." : "Bekräfta radering"}
+                    </button>
+                    <button
+                      onClick={() => setDeleteConfirm(false)}
+                      className="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 rounded-lg transition-colors"
+                    >
+                      Avbryt
+                    </button>
+                  </div>
+                )}
+              </div>
+              
+              <p className="text-sm text-zinc-500">
+                Raderar {dates.length} datamängder från servern. Du kan sedan ladda upp nya via upload-skriptet.
+              </p>
+            </div>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
