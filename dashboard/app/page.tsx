@@ -130,9 +130,6 @@ export default function HomePage() {
     }
   };
 
-  // Get latest date for search navigation
-  const latestDate = dates.length > 0 ? dates[0].date : null;
-
   const formatDate = (dateStr: string) => {
     const year = parseInt(dateStr.slice(0, 4));
     const month = parseInt(dateStr.slice(4, 6)) - 1;
