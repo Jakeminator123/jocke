@@ -6,17 +6,21 @@ import {
   Building2, 
   Users, 
   ArrowLeft, 
-  Search,
   Globe,
   Mail,
-  Calendar,
-  ExternalLink
+  Calendar
 } from "lucide-react";
 import Link from "next/link";
 import type { NormalizedCompany, NormalizedPerson } from "@/lib/normalize";
 
 interface CompanyWithDate extends NormalizedCompany {
   sourceDate: string;
+  hasMail: boolean;
+  hasAudit: boolean;
+  hasPreview: boolean;
+  worthySite: boolean;
+  hasEmail: boolean;
+  hasDomain: boolean;
 }
 
 interface PersonWithDate extends NormalizedPerson {
@@ -28,6 +32,12 @@ function SearchResultsContent() {
   const query = searchParams.get("q") || "";
   const segment = searchParams.get("segment") || "";
   const lan = searchParams.get("lan") || "";
+  const hasMail = parseBooleanParam(searchParams.get("hasMail"));
+  const hasAudit = parseBooleanParam(searchParams.get("hasAudit"));
+  const hasPreview = parseBooleanParam(searchParams.get("hasPreview"));
+  const worthySite = parseBooleanParam(searchParams.get("worthy"));
+  const hasEmail = parseBooleanParam(searchParams.get("hasEmail"));
+  const hasDomain = parseBooleanParam(searchParams.get("hasDomain"));
   
   const [companies, setCompanies] = useState<CompanyWithDate[]>([]);
   const [people, setPeople] = useState<PersonWithDate[]>([]);
@@ -38,7 +48,7 @@ function SearchResultsContent() {
 
   useEffect(() => {
     fetchResults();
-  }, [query, segment, lan]);
+  }, [query, segment, lan, hasMail, hasAudit, hasPreview, worthySite, hasEmail, hasDomain]);
 
   const fetchResults = async () => {
     setLoading(true);
@@ -47,6 +57,12 @@ function SearchResultsContent() {
       if (query) params.set("q", query);
       if (segment) params.set("segment", segment);
       if (lan) params.set("lan", lan);
+      if (hasMail) params.set("hasMail", "1");
+      if (hasAudit) params.set("hasAudit", "1");
+      if (hasPreview) params.set("hasPreview", "1");
+      if (worthySite) params.set("worthy", "1");
+      if (hasEmail) params.set("hasEmail", "1");
+      if (hasDomain) params.set("hasDomain", "1");
       
       const response = await fetch(`/api/search?${params.toString()}`);
       if (response.ok) {
@@ -64,10 +80,17 @@ function SearchResultsContent() {
   };
 
   const getTitle = () => {
-    if (segment) return `Segment: ${segment}`;
-    if (lan) return `Län: ${lan}`;
-    if (query) return `Sökresultat: "${query}"`;
-    return "Sökresultat";
+    const parts: string[] = [];
+    if (segment) parts.push(`Segment: ${segment}`);
+    if (lan) parts.push(`Län: ${lan}`);
+    if (hasMail) parts.push("Har mail");
+    if (hasAudit) parts.push("Har audit");
+    if (hasPreview) parts.push("Har preview");
+    if (worthySite) parts.push("Ska få sajt");
+    if (hasEmail) parts.push("Har e-post");
+    if (hasDomain) parts.push("Har domän");
+    if (query) parts.push(`Sök: "${query}"`);
+    return parts.length > 0 ? parts.join(" • ") : "Sökresultat";
   };
 
   const formatDate = (dateStr: string) => {
@@ -109,13 +132,13 @@ function SearchResultsContent() {
         <StatCard icon={Users} label="Personer" value={totalPeople} />
         <StatCard 
           icon={Globe} 
-          label="Med domän" 
-          value={companies.filter(c => c.domain_verified || c.domain_guess).length} 
+          label="Har domän" 
+          value={companies.filter(c => c.hasDomain).length} 
         />
         <StatCard 
           icon={Mail} 
-          label="Med e-post" 
-          value={companies.filter(c => c.epost || c.emails_found).length} 
+          label="Har e-post" 
+          value={companies.filter(c => c.hasEmail).length} 
         />
       </div>
 
@@ -221,6 +244,7 @@ function CompaniesTable({
               <th className="text-left px-4 py-3 font-medium">Län</th>
               <th className="text-left px-4 py-3 font-medium">E-post</th>
               <th className="text-left px-4 py-3 font-medium">Datum</th>
+              <th className="text-left px-4 py-3 font-medium">Status</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800">
@@ -255,6 +279,14 @@ function CompaniesTable({
                     <Calendar className="w-3 h-3" />
                     {formatDate(company.sourceDate)}
                   </Link>
+                </td>
+                <td className="px-4 py-3">
+                  <div className="flex flex-wrap gap-1">
+                    {company.hasMail && <StatusBadge label="Mail" />}
+                    {company.hasAudit && <StatusBadge label="Audit" />}
+                    {company.hasPreview && <StatusBadge label="Preview" />}
+                    {company.worthySite && <StatusBadge label="Sajt" />}
+                  </div>
                 </td>
               </tr>
             ))}
@@ -307,7 +339,7 @@ function PeopleTable({
                 </td>
                 <td className="px-4 py-3">
                   <Link 
-                    href={`/date/${person.sourceDate}/company/${person.kungorelse_id}`}
+                    href={`/date/${person.sourceDate}/company/${person.mapp || person.kungorelse_id}`}
                     className="text-blue-400 hover:text-blue-300 hover:underline"
                   >
                     {person.foretagsnamn || "—"}
@@ -339,4 +371,18 @@ function RoleBadge({ role }: { role: string | null }) {
     : "bg-zinc-800 text-zinc-300";
     
   return <span className={`px-2 py-1 rounded text-xs ${color}`}>{role}</span>;
+}
+
+function StatusBadge({ label }: { label: string }) {
+  return (
+    <span className="px-2 py-0.5 rounded text-xs bg-zinc-800 text-zinc-300">
+      {label}
+    </span>
+  );
+}
+
+function parseBooleanParam(value: string | null): boolean {
+  if (!value) return false;
+  const v = value.toLowerCase();
+  return v === "1" || v === "true" || v === "yes";
 }

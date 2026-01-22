@@ -30,6 +30,12 @@ interface CompanyData {
   audits: NormalizedAudit[];
 }
 
+interface CompanyFile {
+  name: string;
+  size: number;
+  isDir: boolean;
+}
+
 export default function CompanyDetailPage() {
   const params = useParams();
   const date = params.date as string;
@@ -42,10 +48,13 @@ export default function CompanyDetailPage() {
     audits: [],
   });
   const [loading, setLoading] = useState(true);
+  const [files, setFiles] = useState<CompanyFile[]>([]);
+  const [filesLoading, setFilesLoading] = useState(false);
 
   useEffect(() => {
     if (date && mapp) {
       fetchCompanyData();
+      fetchCompanyFiles();
     }
   }, [date, mapp]);
 
@@ -62,12 +71,12 @@ export default function CompanyDetailPage() {
         
         // Find all people for this company
         const people = (allData.people || []).filter(
-          (p: NormalizedPerson) => p.kungorelse_id === mapp
+          (p: NormalizedPerson) => p.mapp === mapp || p.kungorelse_id === mapp
         );
         
         // Find all mails for this company
         const mails = (allData.mails || []).filter(
-          (m: NormalizedMail) => m.folder === mapp
+          (m: NormalizedMail) => m.mapp === mapp || m.folder === mapp
         );
         
         // Find all audits for this company
@@ -81,6 +90,21 @@ export default function CompanyDetailPage() {
       console.error("Error fetching company data:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCompanyFiles = async () => {
+    setFilesLoading(true);
+    try {
+      const response = await fetch(`/api/data/${date}/company/${mapp}/files`);
+      if (response.ok) {
+        const result = await response.json();
+        setFiles(result.files || []);
+      }
+    } catch (error) {
+      console.error("Error fetching company files:", error);
+    } finally {
+      setFilesLoading(false);
     }
   };
 
@@ -399,6 +423,43 @@ export default function CompanyDetailPage() {
         )}
       </section>
 
+      {/* Files */}
+      <section className="bg-zinc-900 rounded-lg p-6">
+        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+          <FileText className="w-5 h-5 text-zinc-400" />
+          Filer i mappen ({files.length})
+        </h2>
+
+        {filesLoading ? (
+          <p className="text-zinc-500">Laddar filer...</p>
+        ) : files.length > 0 ? (
+          <div className="space-y-2">
+            {files.map((file) => (
+              <div key={file.name} className="flex items-center justify-between bg-zinc-800 rounded-lg px-4 py-2">
+                <div>
+                  <div className="text-sm">{file.name}</div>
+                  <div className="text-xs text-zinc-500">
+                    {file.isDir ? "Mapp" : formatFileSize(file.size)}
+                  </div>
+                </div>
+                {!file.isDir && (
+                  <a
+                    href={`/api/data/${date}/company/${mapp}/files/${encodeURIComponent(file.name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-400 hover:text-blue-300"
+                  >
+                    Ladda ner
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-zinc-500">Inga filer hittades i mappen</p>
+        )}
+      </section>
+
       {/* Evaluation status */}
       {(company.ska_fa_sajt || company.preview_url) && (
         <section className="bg-zinc-900 rounded-lg p-6">
@@ -482,4 +543,12 @@ function ScoreCard({ label, score }: { label: string; score: number | null }) {
       <div className="text-xs text-zinc-500">{label}</div>
     </div>
   );
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) return "0 B";
+  const units = ["B", "KB", "MB", "GB"];
+  const idx = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const value = bytes / Math.pow(1024, idx);
+  return `${value.toFixed(value >= 10 || idx === 0 ? 0 : 1)} ${units[idx]}`;
 }

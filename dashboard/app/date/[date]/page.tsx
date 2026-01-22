@@ -126,7 +126,8 @@ export default function DateDetailPage() {
         p.foretagsnamn,
         p.orgnr,
         p.roll,
-        p.ort
+        p.ort,
+        p.mapp
       ].filter(Boolean).join(" ").toLowerCase();
       return text.includes(q);
     });
@@ -140,7 +141,8 @@ export default function DateDetailPage() {
         m.company,
         m.email,
         m.subject,
-        m.folder
+        m.folder,
+        m.mapp
       ].filter(Boolean).join(" ").toLowerCase();
       return text.includes(q);
     });

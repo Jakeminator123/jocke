@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 import { join } from "path";
 import { readdirSync } from "fs";
 import { isAuthenticated } from "@/lib/auth";
-import Database from "better-sqlite3";
-import { parseExcelFile } from "@/lib/excel";
-import { getExistingDateDir, PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, BUNDLES_DIR } from "@/lib/data-paths";
+import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, BUNDLES_DIR } from "@/lib/data-paths";
 import { existsSync } from "fs";
+import { readDateData } from "@/lib/data-reader";
 
 interface TotalStats {
   totalCompanies: number;
@@ -15,10 +14,13 @@ interface TotalStats {
   companiesWithDomain: number;
   companiesWithEmail: number;
   companiesWithPhone: number;
-  uniqueSegments: Set<string>;
-  uniqueLans: Set<string>;
+  companiesWithMail: number;
+  companiesWithAudit: number;
+  companiesWithPreview: number;
+  companiesWorthySite: number;
   segments: Record<string, number>;
   lans: Record<string, number>;
+  domainStatuses: Record<string, number>;
 }
 
 export async function GET() {
@@ -55,129 +57,90 @@ export async function GET() {
       companiesWithDomain: 0,
       companiesWithEmail: 0,
       companiesWithPhone: 0,
-      uniqueSegments: new Set(),
-      uniqueLans: new Set(),
+      companiesWithMail: 0,
+      companiesWithAudit: 0,
+      companiesWithPreview: 0,
+      companiesWorthySite: 0,
       segments: {},
       lans: {},
+      domainStatuses: {},
     };
 
     const seenCompanies = new Set<string>();
     const seenPeople = new Set<string>();
+    const mailCompanies = new Set<string>();
+    const auditCompanies = new Set<string>();
+    const previewCompanies = new Set<string>();
+    const worthyCompanies = new Set<string>();
+    const emailCompanies = new Set<string>();
+    const domainCompanies = new Set<string>();
 
     for (const dateDir of dateDirs) {
       try {
-        const files = readdirSync(dateDir);
-        
-        // Process SQLite databases
-        for (const file of files) {
-          if (file.endsWith(".db")) {
-            const dbPath = join(dateDir, file);
-            try {
-              const db = new Database(dbPath, { readonly: true });
-              const tables = db
-                .prepare("SELECT name FROM sqlite_master WHERE type='table'")
-                .all() as { name: string }[];
-              
-              if (tables.some(t => t.name === "companies")) {
-                const companies = db.prepare("SELECT * FROM companies").all() as Record<string, unknown>[];
-                for (const c of companies) {
-                  const key = String(c.mapp || c.orgnr || "");
-                  if (key && !seenCompanies.has(key)) {
-                    seenCompanies.add(key);
-                    totals.totalCompanies++;
-                    
-                    if (c.domain_verified || c.domain_guess) totals.companiesWithDomain++;
-                    if (c.epost || c.emails_found) totals.companiesWithEmail++;
-                    if (c.phones_found) totals.companiesWithPhone++;
-                    
-                    const segment = String(c.segment || "Okänt");
-                    totals.segments[segment] = (totals.segments[segment] || 0) + 1;
-                    totals.uniqueSegments.add(segment);
-                    
-                    const lan = String(c.lan || "Okänt");
-                    totals.lans[lan] = (totals.lans[lan] || 0) + 1;
-                    totals.uniqueLans.add(lan);
-                  }
-                }
-              }
-              
-              if (tables.some(t => t.name === "people" || t.name === "personer")) {
-                const tableName = tables.find(t => t.name === "people" || t.name === "personer")?.name;
-                if (tableName) {
-                  const people = db.prepare(`SELECT * FROM ${tableName}`).all() as Record<string, unknown>[];
-                  for (const p of people) {
-                    const key = `${p.personnummer || ""}-${p.kungorelse_id || ""}`;
-                    if (!seenPeople.has(key)) {
-                      seenPeople.add(key);
-                      totals.totalPeople++;
-                    }
-                  }
-                }
-              }
-              
-              db.close();
-            } catch (e) {
-              console.error(`Error reading ${dbPath}:`, e);
-            }
-          }
-        }
+        const { data } = await readDateData(dateDir);
 
-        // Process Excel files
-        for (const file of files) {
-          if (file.endsWith(".xlsx")) {
-            const xlsxPath = join(dateDir, file);
-            try {
-              const { sheets } = await parseExcelFile(xlsxPath);
-              
-              // Companies from Huvuddata or Data
-              const companySheet = sheets["Huvuddata"] || sheets["Data"] || [];
-              for (const c of companySheet as Record<string, unknown>[]) {
-                const key = String(c["Mapp"] || c["Org.nr"] || "");
-                if (key && !seenCompanies.has(key)) {
-                  seenCompanies.add(key);
-                  totals.totalCompanies++;
-                  
-                  if (c["domain_verified"] || c["domain_guess"]) totals.companiesWithDomain++;
-                  if (c["E-post"] || c["emails_found"]) totals.companiesWithEmail++;
-                  if (c["phones_found"]) totals.companiesWithPhone++;
-                  
-                  const segment = String(c["Segment"] || "Okänt");
-                  totals.segments[segment] = (totals.segments[segment] || 0) + 1;
-                  totals.uniqueSegments.add(segment);
-                  
-                  const lan = String(c["Län"] || "Okänt");
-                  totals.lans[lan] = (totals.lans[lan] || 0) + 1;
-                  totals.uniqueLans.add(lan);
-                }
-              }
-              
-              // People from Personer
-              const peopleSheet = sheets["Personer"] || [];
-              for (const p of peopleSheet as Record<string, unknown>[]) {
-                const key = `${p["Personnummer"] || ""}-${p["Kungörelse-id"] || ""}`;
-                if (!seenPeople.has(key)) {
-                  seenPeople.add(key);
-                  totals.totalPeople++;
-                }
-              }
-              
-              // Mails
-              const mailSheet = sheets["Mails"] || sheets["Mail"] || [];
-              totals.totalMails += (mailSheet as unknown[]).length;
-              
-              // Audits
-              const auditSheet = sheets["Audits"] || [];
-              totals.totalAudits += (auditSheet as unknown[]).length;
-              
-            } catch (e) {
-              console.error(`Error reading ${xlsxPath}:`, e);
-            }
+        totals.totalMails += data.mails.length;
+        totals.totalAudits += data.audits.length;
+
+        data.companies.forEach((c) => {
+          const key = c.mapp || c.orgnr;
+          if (!key || seenCompanies.has(key)) return;
+          seenCompanies.add(key);
+          totals.totalCompanies++;
+
+          if (c.domain_verified || c.domain_guess) domainCompanies.add(key);
+          if (c.epost || c.emails_found) emailCompanies.add(key);
+          if (c.phones_found) totals.companiesWithPhone++;
+
+          if (c.preview_url) previewCompanies.add(key);
+          if (c.ska_fa_sajt?.toLowerCase() === "ja") worthyCompanies.add(key);
+
+          const status = c.domain_status || "unknown";
+          totals.domainStatuses[status] = (totals.domainStatuses[status] || 0) + 1;
+
+          const segment = c.segment || "Okänt";
+          totals.segments[segment] = (totals.segments[segment] || 0) + 1;
+
+          const lan = c.lan || "Okänt";
+          totals.lans[lan] = (totals.lans[lan] || 0) + 1;
+        });
+
+        data.people.forEach((p) => {
+          const key = `${p.personnummer || ""}-${p.kungorelse_id || ""}`;
+          if (seenPeople.has(key)) return;
+          seenPeople.add(key);
+          totals.totalPeople++;
+        });
+
+        data.mails.forEach((m) => {
+          if (m.mapp) {
+            mailCompanies.add(m.mapp);
+            if (m.site_preview_url) previewCompanies.add(m.mapp);
+            if (m.email) emailCompanies.add(m.mapp);
           }
-        }
+        });
+
+        data.audits.forEach((a) => {
+          if (a.mapp) auditCompanies.add(a.mapp);
+        });
+
+        data.evaluations.forEach((e) => {
+          if (e.mapp) {
+            if (e.preview_url) previewCompanies.add(e.mapp);
+            if (e.ska_fa_sajt?.toLowerCase() === "ja") worthyCompanies.add(e.mapp);
+          }
+        });
       } catch (e) {
         console.error(`Error processing ${dateDir}:`, e);
       }
     }
+
+    totals.companiesWithDomain = domainCompanies.size;
+    totals.companiesWithEmail = emailCompanies.size;
+    totals.companiesWithMail = mailCompanies.size;
+    totals.companiesWithAudit = auditCompanies.size;
+    totals.companiesWithPreview = previewCompanies.size;
+    totals.companiesWorthySite = worthyCompanies.size;
 
     return NextResponse.json({
       totalCompanies: totals.totalCompanies,
@@ -187,9 +150,14 @@ export async function GET() {
       companiesWithDomain: totals.companiesWithDomain,
       companiesWithEmail: totals.companiesWithEmail,
       companiesWithPhone: totals.companiesWithPhone,
+      companiesWithMail: totals.companiesWithMail,
+      companiesWithAudit: totals.companiesWithAudit,
+      companiesWithPreview: totals.companiesWithPreview,
+      companiesWorthySite: totals.companiesWorthySite,
       totalDates: dateDirs.length,
       segments: totals.segments,
       lans: totals.lans,
+      domainStatuses: totals.domainStatuses,
     });
   } catch (error) {
     console.error("Error calculating totals:", error);

@@ -33,9 +33,14 @@ interface TotalStats {
   companiesWithDomain: number;
   companiesWithEmail: number;
   companiesWithPhone: number;
+  companiesWithMail: number;
+  companiesWithAudit: number;
+  companiesWithPreview: number;
+  companiesWorthySite: number;
   totalDates: number;
   segments: Record<string, number>;
   lans: Record<string, number>;
+  domainStatuses: Record<string, number>;
 }
 
 export default function HomePage() {
@@ -231,6 +236,51 @@ export default function HomePage() {
                   {lan} <span className="text-zinc-400">({count})</span>
                 </button>
               ))}
+          </div>
+        </section>
+      )}
+
+      {/* Status & data */}
+      {stats && (
+        <section className="bg-zinc-900 rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Status</h2>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => router.push("/search?hasMail=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Har mail <span className="text-zinc-400">({stats.companiesWithMail})</span>
+            </button>
+            <button
+              onClick={() => router.push("/search?hasAudit=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Har audit <span className="text-zinc-400">({stats.companiesWithAudit})</span>
+            </button>
+            <button
+              onClick={() => router.push("/search?hasPreview=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Har preview <span className="text-zinc-400">({stats.companiesWithPreview})</span>
+            </button>
+            <button
+              onClick={() => router.push("/search?worthy=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Ska få sajt <span className="text-zinc-400">({stats.companiesWorthySite})</span>
+            </button>
+            <button
+              onClick={() => router.push("/search?hasEmail=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Har e-post <span className="text-zinc-400">({stats.companiesWithEmail})</span>
+            </button>
+            <button
+              onClick={() => router.push("/search?hasDomain=1")}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
+            >
+              Har domän <span className="text-zinc-400">({stats.companiesWithDomain})</span>
+            </button>
           </div>
         </section>
       )}

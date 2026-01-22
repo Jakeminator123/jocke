@@ -48,6 +48,7 @@ export interface NormalizedCompany {
 }
 
 export interface NormalizedPerson {
+  mapp: string;
   kungorelse_id: string;  // Maps to company via mapp
   foretagsnamn: string;
   orgnr: string;
@@ -62,6 +63,7 @@ export interface NormalizedPerson {
 }
 
 export interface NormalizedMail {
+  mapp: string;  // Normalized folder/mapp id
   folder: string;  // Maps to company via mapp
   company: string;
   email: string;
@@ -69,6 +71,8 @@ export interface NormalizedMail {
   mail_content: string | null;
   cost_sek: number | null;
   domain_status: string | null;
+  mail_status: string | null;
+  sender_name: string | null;
   site_preview_url: string | null;
   audit_note: string | null;
 }
@@ -93,6 +97,7 @@ export interface NormalizedAudit {
 }
 
 export interface NormalizedEvaluation {
+  mapp: string;
   kungorelse_id: string;
   foretagsnamn: string;
   ska_fa_sajt: string | null;
@@ -189,6 +194,7 @@ const COMPANY_FIELD_MAP: Record<string, keyof NormalizedCompany> = {
 };
 
 const PERSON_FIELD_MAP: Record<string, keyof NormalizedPerson> = {
+  "Mapp": "mapp",
   "Kungörelse-id": "kungorelse_id",
   "Företagsnamn": "foretagsnamn",
   "Org.nr": "orgnr",
@@ -201,6 +207,7 @@ const PERSON_FIELD_MAP: Record<string, keyof NormalizedPerson> = {
   "Postnummer": "postnummer",
   "Ort": "ort",
   // snake_case
+  "mapp": "mapp",
   "kungorelse_id": "kungorelse_id",
   "foretagsnamn": "foretagsnamn",
   "orgnr": "orgnr",
@@ -218,20 +225,26 @@ const PERSON_FIELD_MAP: Record<string, keyof NormalizedPerson> = {
 const MAIL_FIELD_MAP: Record<string, keyof NormalizedMail> = {
   "folder": "folder",
   "company": "company",
+  "Company": "company",
   "email": "email",
+  "Email": "email",
   "subject": "subject",
   "mail_content": "mail_content",
   "cost_sek": "cost_sek",
   "domain_status": "domain_status",
+  "main_status": "mail_status",
   "site_preview_url": "site_preview_url",
   "audit_note": "audit_note",
   // Swedish alternatives
+  "Mapp": "folder",
+  "mapp": "folder",
   "Företagsnamn": "company",
   "E-post": "email",
-  "Email": "email",
   "Ämne": "subject",
   "Mail-text": "mail_content",
-  "Status": "domain_status",
+  "Status": "mail_status",
+  "[Ditt namn]": "sender_name",
+  "Ditt namn": "sender_name",
 };
 
 const AUDIT_FIELD_MAP: Record<string, keyof NormalizedAudit> = {
@@ -256,6 +269,7 @@ const AUDIT_FIELD_MAP: Record<string, keyof NormalizedAudit> = {
 };
 
 const EVALUATION_FIELD_MAP: Record<string, keyof NormalizedEvaluation> = {
+  "Mapp": "kungorelse_id",
   "Kungörelse-id": "kungorelse_id",
   "Företagsnamn": "foretagsnamn",
   "Ska få sajt": "ska_fa_sajt",
@@ -293,6 +307,18 @@ function asNumber(value: unknown): number | null {
   return isNaN(parsed) ? null : parsed;
 }
 
+export function normalizeMapp(value: unknown): string {
+  if (!value) return "";
+  return String(value).trim().replace("/", "-");
+}
+
+function kungorelseIdFromMapp(mapp: string): string {
+  if (!mapp) return "";
+  const idx = mapp.indexOf("-");
+  if (idx === -1) return mapp;
+  return `${mapp.slice(0, idx)}/${mapp.slice(idx + 1)}`;
+}
+
 // ============================================================
 // NORMALIZERS
 // ============================================================
@@ -307,9 +333,11 @@ export function normalizeCompany(raw: Record<string, unknown>): NormalizedCompan
     }
   }
 
+  const mapp = normalizeMapp(asString(result.mapp) ?? asString(result.kungorelse_id));
+
   return {
-    mapp: asString(result.mapp) ?? "",
-    kungorelse_id: asString(result.kungorelse_id) ?? "",
+    mapp,
+    kungorelse_id: asString(result.kungorelse_id) ?? (mapp ? kungorelseIdFromMapp(mapp) : ""),
     foretagsnamn: asString(result.foretagsnamn) ?? "",
     orgnr: asString(result.orgnr) ?? "",
     registreringsdatum: asString(result.registreringsdatum),
@@ -355,8 +383,11 @@ export function normalizePerson(raw: Record<string, unknown>): NormalizedPerson 
     }
   }
 
+  const mapp = normalizeMapp(asString(result.mapp) ?? asString(result.kungorelse_id));
+
   return {
-    kungorelse_id: asString(result.kungorelse_id) ?? "",
+    mapp,
+    kungorelse_id: asString(result.kungorelse_id) ?? (mapp ? kungorelseIdFromMapp(mapp) : ""),
     foretagsnamn: asString(result.foretagsnamn) ?? "",
     orgnr: asString(result.orgnr) ?? "",
     roll: asString(result.roll),
@@ -380,14 +411,20 @@ export function normalizeMail(raw: Record<string, unknown>): NormalizedMail {
     }
   }
 
+  const folder = asString(result.folder) ?? "";
+  const mapp = normalizeMapp(folder);
+
   return {
-    folder: asString(result.folder) ?? "",
+    mapp,
+    folder,
     company: asString(result.company) ?? "",
     email: asString(result.email) ?? "",
     subject: asString(result.subject) ?? "",
     mail_content: asString(result.mail_content),
     cost_sek: asNumber(result.cost_sek),
     domain_status: asString(result.domain_status),
+    mail_status: asString(result.mail_status),
+    sender_name: asString(result.sender_name),
     site_preview_url: asString(result.site_preview_url),
     audit_note: asString(result.audit_note),
   };
@@ -404,7 +441,7 @@ export function normalizeAudit(raw: Record<string, unknown>): NormalizedAudit {
   }
 
   return {
-    mapp: asString(result.mapp) ?? "",
+    mapp: normalizeMapp(asString(result.mapp)),
     foretagsnamn: asString(result.foretagsnamn) ?? "",
     hemsida: asString(result.hemsida),
     audit_datum: asString(result.audit_datum),
@@ -431,8 +468,11 @@ export function normalizeEvaluation(raw: Record<string, unknown>): NormalizedEva
     }
   }
 
+  const mapp = normalizeMapp(asString(result.kungorelse_id));
+
   return {
-    kungorelse_id: asString(result.kungorelse_id) ?? "",
+    mapp,
+    kungorelse_id: asString(result.kungorelse_id) ?? (mapp ? kungorelseIdFromMapp(mapp) : ""),
     foretagsnamn: asString(result.foretagsnamn) ?? "",
     ska_fa_sajt: asString(result.ska_fa_sajt),
     konfidens: asString(result.konfidens),
@@ -509,6 +549,8 @@ export interface DataStats {
   totalMails: number;
   totalAudits: number;
   totalEvaluations: number;
+  companiesWithMail: number;
+  companiesWithAudit: number;
   hasPeopleData: boolean;
   hasMailData: boolean;
   hasAuditData: boolean;
@@ -532,6 +574,9 @@ export function calculateStats(data: NormalizedData): DataStats {
   const segments: Record<string, number> = {};
   const lans: Record<string, number> = {};
   const domainStatuses: Record<string, number> = {};
+  const mailCompanies = new Set<string>();
+  const auditCompanies = new Set<string>();
+  const previewCompanies = new Set<string>();
 
   companies.forEach((c) => {
     const segment = c.segment || "Okänt";
@@ -542,12 +587,23 @@ export function calculateStats(data: NormalizedData): DataStats {
     
     const status = c.domain_status || "unknown";
     domainStatuses[status] = (domainStatuses[status] || 0) + 1;
+
+    if (c.preview_url) previewCompanies.add(c.mapp || c.orgnr);
   });
 
-  // Count from mails too
   mails.forEach((m) => {
     const status = m.domain_status || "unknown";
     domainStatuses[status] = (domainStatuses[status] || 0) + 1;
+    if (m.mapp) mailCompanies.add(m.mapp);
+    if (m.site_preview_url && m.mapp) previewCompanies.add(m.mapp);
+  });
+
+  audits.forEach((a) => {
+    if (a.mapp) auditCompanies.add(a.mapp);
+  });
+
+  evaluations.forEach((e) => {
+    if (e.preview_url && e.mapp) previewCompanies.add(e.mapp);
   });
 
   return {
@@ -556,13 +612,15 @@ export function calculateStats(data: NormalizedData): DataStats {
     totalMails: mails.length,
     totalAudits: audits.length,
     totalEvaluations: evaluations.length,
+    companiesWithMail: mailCompanies.size,
+    companiesWithAudit: auditCompanies.size,
     hasPeopleData: people.length > 0,
     hasMailData: mails.length > 0,
     hasAuditData: audits.length > 0,
-    companiesWithDomain: companies.filter((c) => c.domain_verified).length,
+    companiesWithDomain: companies.filter((c) => c.domain_verified || c.domain_guess).length,
     companiesWithEmail: companies.filter((c) => c.epost || c.emails_found).length,
     companiesWithPhone: companies.filter((c) => c.phones_found).length,
-    companiesWithPreview: companies.filter((c) => c.preview_url).length + mails.filter((m) => m.site_preview_url).length,
+    companiesWithPreview: previewCompanies.size,
     companiesWorthySite: companies.filter((c) => c.ska_fa_sajt?.toLowerCase() === "ja").length,
     uniquePeople: new Set(people.map((p) => p.personnummer).filter(Boolean)).size,
     boardMembers: people.filter((p) => p.roll?.includes("Styrelseledamot")).length,
@@ -596,3 +654,202 @@ export const MAIL_SHEET_NAMES = ["Mails", "Mail", "mails", "mail"];
 export const AUDIT_SHEET_NAMES = ["Audits", "audits", "Audit"];
 export const EVALUATION_SHEET_NAMES = ["Evaluation", "Evaluations", "evaluation"];
 export const SUMMARY_SHEET_NAMES = ["Sammanfattning", "Summary", "sammanfattning"];
+
+// ============================================================
+// MERGE/LINK HELPERS
+// ============================================================
+
+function mergeValue<T>(current: T, next: T): T {
+  if (current === null || current === undefined) {
+    return next ?? current;
+  }
+  if (typeof current === "string" && current.trim() === "") {
+    return next ?? current;
+  }
+  return current;
+}
+
+function mergeCompany(base: NormalizedCompany, update: Partial<NormalizedCompany>): NormalizedCompany {
+  const result: NormalizedCompany = { ...base };
+  for (const [key, value] of Object.entries(update)) {
+    const k = key as keyof NormalizedCompany;
+    (result as Record<string, unknown>)[k] = mergeValue(result[k] as unknown, value as unknown) as never;
+  }
+  return result;
+}
+
+function createCompanySkeleton(mapp: string, foretagsnamn?: string, orgnr?: string): NormalizedCompany {
+  return {
+    mapp,
+    kungorelse_id: mapp ? kungorelseIdFromMapp(mapp) : "",
+    foretagsnamn: foretagsnamn || "Okänt företag",
+    orgnr: orgnr || "",
+    registreringsdatum: null,
+    publiceringsdatum: null,
+    lan: null,
+    sate: null,
+    postadress: null,
+    epost: null,
+    typ: null,
+    bildat: null,
+    verksamhet: null,
+    rakenskapsar: null,
+    aktiekapital: null,
+    antal_aktier: null,
+    firmateckning: null,
+    styrelseledamoter: null,
+    styrelsesuppleanter: null,
+    styrelse_ovrigt: null,
+    segment: null,
+    kalla_url: null,
+    domain_guess: null,
+    domain_verified: null,
+    domain_confidence: null,
+    domain_status: null,
+    emails_found: null,
+    phones_found: null,
+    people_count: null,
+    research_done: null,
+    ska_fa_sajt: null,
+    konfidens: null,
+    preview_url: null,
+    audit_link: null,
+  };
+}
+
+function getCompanyKey(company: Partial<NormalizedCompany>): string {
+  return company.mapp || company.orgnr || "";
+}
+
+function normalizeLookupValue(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function extractEmails(value: string | null | undefined): string[] {
+  if (!value) return [];
+  const matches = value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi);
+  if (!matches) return [];
+  return Array.from(new Set(matches.map((email) => email.toLowerCase())));
+}
+
+function addUniqueMapping(map: Map<string, string | null>, key: string, value: string) {
+  if (!key) return;
+  if (!map.has(key)) {
+    map.set(key, value);
+    return;
+  }
+  if (map.get(key) !== value) {
+    map.set(key, null);
+  }
+}
+
+function pickUniqueKey(keys: Array<string | null | undefined>): string {
+  const unique = new Set(keys.filter((value): value is string => !!value));
+  return unique.size === 1 ? Array.from(unique)[0] : "";
+}
+
+export function mergeLinkedData(data: NormalizedData): NormalizedData {
+  const companyMap = new Map<string, NormalizedCompany>();
+  const orgnrIndex = new Map<string, string>();
+  const nameIndex = new Map<string, string | null>();
+  const emailIndex = new Map<string, string | null>();
+
+  for (const company of data.companies) {
+    const key = getCompanyKey(company);
+    if (!key) continue;
+    const existing = companyMap.get(key);
+    companyMap.set(key, existing ? mergeCompany(existing, company) : company);
+    if (company.orgnr) {
+      orgnrIndex.set(company.orgnr, key);
+    }
+    if (company.foretagsnamn) {
+      addUniqueMapping(nameIndex, normalizeLookupValue(company.foretagsnamn), key);
+    }
+    extractEmails(company.epost).forEach((email) => addUniqueMapping(emailIndex, email, key));
+    extractEmails(company.emails_found).forEach((email) => addUniqueMapping(emailIndex, email, key));
+  }
+
+  const ensureCompany = (partial: Partial<NormalizedCompany>) => {
+    let key = getCompanyKey(partial);
+    if (!key && partial.orgnr && orgnrIndex.has(partial.orgnr)) {
+      key = orgnrIndex.get(partial.orgnr) || "";
+    }
+    if (!key && partial.foretagsnamn) {
+      const nameKey = nameIndex.get(normalizeLookupValue(partial.foretagsnamn));
+      if (nameKey) {
+        key = nameKey;
+      }
+    }
+    if (!key && partial.epost) {
+      const matches = extractEmails(partial.epost).map((email) => emailIndex.get(email));
+      const unique = pickUniqueKey(matches);
+      if (unique) {
+        key = unique;
+      }
+    }
+    if (!key) return;
+
+    const existing = companyMap.get(key);
+    if (!existing) {
+      const created = mergeCompany(
+        createCompanySkeleton(partial.mapp || "", partial.foretagsnamn, partial.orgnr),
+        partial
+      );
+      companyMap.set(key, created);
+      if (created.orgnr) {
+        orgnrIndex.set(created.orgnr, key);
+      }
+      return;
+    }
+
+    const merged = mergeCompany(existing, partial);
+    companyMap.set(key, merged);
+    if (merged.orgnr) {
+      orgnrIndex.set(merged.orgnr, key);
+    }
+  };
+
+  data.people.forEach((p) => {
+    ensureCompany({
+      mapp: p.mapp,
+      foretagsnamn: p.foretagsnamn,
+      orgnr: p.orgnr,
+    });
+  });
+
+  data.mails.forEach((m) => {
+    ensureCompany({
+      mapp: m.mapp,
+      foretagsnamn: m.company,
+      epost: m.email,
+      preview_url: m.site_preview_url || null,
+    });
+  });
+
+  data.audits.forEach((a) => {
+    ensureCompany({
+      mapp: a.mapp,
+      foretagsnamn: a.foretagsnamn,
+    });
+  });
+
+  data.evaluations.forEach((e) => {
+    ensureCompany({
+      mapp: e.mapp,
+      foretagsnamn: e.foretagsnamn,
+      ska_fa_sajt: e.ska_fa_sajt,
+      konfidens: e.konfidens,
+      preview_url: e.preview_url,
+    });
+  });
+
+  return {
+    ...data,
+    companies: Array.from(companyMap.values()),
+  };
+}

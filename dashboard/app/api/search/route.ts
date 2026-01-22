@@ -2,15 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import { readdirSync, existsSync } from "fs";
 import { isAuthenticated } from "@/lib/auth";
-import Database from "better-sqlite3";
-import { parseExcelFile } from "@/lib/excel";
 import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, BUNDLES_DIR } from "@/lib/data-paths";
 import {
-  normalizeCompany,
-  normalizePerson,
   type NormalizedCompany,
   type NormalizedPerson,
 } from "@/lib/normalize";
+import { readDateData } from "@/lib/data-reader";
+
+type SearchCompany = NormalizedCompany & {
+  sourceDate: string;
+  hasMail: boolean;
+  hasAudit: boolean;
+  hasPreview: boolean;
+  worthySite: boolean;
+  hasEmail: boolean;
+  hasDomain: boolean;
+};
 
 export async function GET(request: NextRequest) {
   try {
@@ -23,6 +30,12 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get("q")?.toLowerCase() || "";
     const segment = searchParams.get("segment") || "";
     const lan = searchParams.get("lan") || "";
+    const hasMail = parseBooleanParam(searchParams.get("hasMail"));
+    const hasAudit = parseBooleanParam(searchParams.get("hasAudit"));
+    const hasPreview = parseBooleanParam(searchParams.get("hasPreview"));
+    const worthySite = parseBooleanParam(searchParams.get("worthy"));
+    const hasEmail = parseBooleanParam(searchParams.get("hasEmail"));
+    const hasDomain = parseBooleanParam(searchParams.get("hasDomain"));
     const limit = parseInt(searchParams.get("limit") || "200");
 
     // Find all date directories
@@ -46,96 +59,83 @@ export async function GET(request: NextRequest) {
     // Sort by date descending
     dateDirs.sort((a, b) => b.date.localeCompare(a.date));
 
-    const allCompanies: (NormalizedCompany & { sourceDate: string })[] = [];
+    const allCompanies: SearchCompany[] = [];
     const allPeople: (NormalizedPerson & { sourceDate: string })[] = [];
     const seenCompanies = new Set<string>();
     const seenPeople = new Set<string>();
 
     for (const { path: dateDir, date } of dateDirs) {
       try {
-        const files = readdirSync(dateDir);
+        const { data } = await readDateData(dateDir);
 
-        // Process SQLite
-        for (const file of files) {
-          if (file.endsWith(".db")) {
-            const dbPath = join(dateDir, file);
-            try {
-              const db = new Database(dbPath, { readonly: true });
-              const tables = db
-                .prepare("SELECT name FROM sqlite_master WHERE type='table'")
-                .all() as { name: string }[];
+        const mailCompanies = new Set(data.mails.map((m) => m.mapp).filter(Boolean));
+        const auditCompanies = new Set(data.audits.map((a) => a.mapp).filter(Boolean));
+        const previewCompanies = new Set<string>();
+        const worthyCompanies = new Set<string>();
+        const emailCompanies = new Set<string>();
+        const domainCompanies = new Set<string>();
 
-              if (tables.some((t) => t.name === "companies")) {
-                const rows = db.prepare("SELECT * FROM companies").all() as Record<string, unknown>[];
-                for (const row of rows) {
-                  const company = normalizeCompany(row);
-                  const key = company.mapp || company.orgnr;
-                  if (!key || seenCompanies.has(key)) continue;
-                  
-                  if (matchesFilters(company, query, segment, lan)) {
-                    seenCompanies.add(key);
-                    allCompanies.push({ ...company, sourceDate: date });
-                  }
-                }
-              }
+        data.companies.forEach((c) => {
+          if (c.preview_url && c.mapp) previewCompanies.add(c.mapp);
+          if (c.ska_fa_sajt?.toLowerCase() === "ja" && c.mapp) worthyCompanies.add(c.mapp);
+          if ((c.epost || c.emails_found) && c.mapp) emailCompanies.add(c.mapp);
+          if ((c.domain_verified || c.domain_guess) && c.mapp) domainCompanies.add(c.mapp);
+        });
 
-              if (tables.some((t) => t.name === "people" || t.name === "personer")) {
-                const tableName = tables.find((t) => t.name === "people" || t.name === "personer")?.name;
-                if (tableName) {
-                  const rows = db.prepare(`SELECT * FROM ${tableName}`).all() as Record<string, unknown>[];
-                  for (const row of rows) {
-                    const person = normalizePerson(row);
-                    const key = `${person.personnummer}-${person.kungorelse_id}`;
-                    if (seenPeople.has(key)) continue;
-                    
-                    if (matchesPersonFilters(person, query)) {
-                      seenPeople.add(key);
-                      allPeople.push({ ...person, sourceDate: date });
-                    }
-                  }
-                }
-              }
+        data.mails.forEach((m) => {
+          if (m.mapp) {
+            if (m.site_preview_url) previewCompanies.add(m.mapp);
+            if (m.email) emailCompanies.add(m.mapp);
+          }
+        });
 
-              db.close();
-            } catch (e) {
-              console.error(`Error reading ${dbPath}:`, e);
-            }
+        data.evaluations.forEach((e) => {
+          if (e.mapp) {
+            if (e.preview_url) previewCompanies.add(e.mapp);
+            if (e.ska_fa_sajt?.toLowerCase() === "ja") worthyCompanies.add(e.mapp);
+          }
+        });
+
+        for (const company of data.companies) {
+          const key = company.mapp || company.orgnr;
+          if (!key || seenCompanies.has(key)) continue;
+
+          const flags = {
+            hasMail: mailCompanies.has(company.mapp),
+            hasAudit: auditCompanies.has(company.mapp),
+            hasPreview: previewCompanies.has(company.mapp) || !!company.preview_url,
+            worthySite: worthyCompanies.has(company.mapp) || company.ska_fa_sajt?.toLowerCase() === "ja",
+            hasEmail: emailCompanies.has(company.mapp) || !!company.epost || !!company.emails_found,
+            hasDomain: domainCompanies.has(company.mapp) || !!company.domain_verified || !!company.domain_guess,
+          };
+
+          if (
+            matchesCompanyFilters(
+              company,
+              flags,
+              query,
+              segment,
+              lan,
+              hasMail,
+              hasAudit,
+              hasPreview,
+              worthySite,
+              hasEmail,
+              hasDomain
+            )
+          ) {
+            seenCompanies.add(key);
+            allCompanies.push({ ...company, sourceDate: date, ...flags });
           }
         }
 
-        // Process Excel
-        for (const file of files) {
-          if (file.endsWith(".xlsx")) {
-            const xlsxPath = join(dateDir, file);
-            try {
-              const { sheets } = await parseExcelFile(xlsxPath);
+        for (const person of data.people) {
+          const key = `${person.personnummer}-${person.kungorelse_id}`;
+          if (seenPeople.has(key)) continue;
 
-              const companySheet = sheets["Huvuddata"] || sheets["Data"] || [];
-              for (const row of companySheet as Record<string, unknown>[]) {
-                const company = normalizeCompany(row);
-                const key = company.mapp || company.orgnr;
-                if (!key || seenCompanies.has(key)) continue;
-                
-                if (matchesFilters(company, query, segment, lan)) {
-                  seenCompanies.add(key);
-                  allCompanies.push({ ...company, sourceDate: date });
-                }
-              }
-
-              const peopleSheet = sheets["Personer"] || [];
-              for (const row of peopleSheet as Record<string, unknown>[]) {
-                const person = normalizePerson(row);
-                const key = `${person.personnummer}-${person.kungorelse_id}`;
-                if (seenPeople.has(key)) continue;
-                
-                if (matchesPersonFilters(person, query)) {
-                  seenPeople.add(key);
-                  allPeople.push({ ...person, sourceDate: date });
-                }
-              }
-            } catch (e) {
-              console.error(`Error reading ${xlsxPath}:`, e);
-            }
+          if (matchesPersonFilters(person, query)) {
+            seenPeople.add(key);
+            allPeople.push({ ...person, sourceDate: date });
           }
         }
 
@@ -152,6 +152,12 @@ export async function GET(request: NextRequest) {
       query,
       segment,
       lan,
+      hasMail,
+      hasAudit,
+      hasPreview,
+      worthySite,
+      hasEmail,
+      hasDomain,
       companies: allCompanies.slice(0, limit),
       people: allPeople.slice(0, limit),
       totalCompanies: allCompanies.length,
@@ -163,11 +169,25 @@ export async function GET(request: NextRequest) {
   }
 }
 
-function matchesFilters(
+function matchesCompanyFilters(
   company: NormalizedCompany,
+  flags: {
+    hasMail: boolean;
+    hasAudit: boolean;
+    hasPreview: boolean;
+    worthySite: boolean;
+    hasEmail: boolean;
+    hasDomain: boolean;
+  },
   query: string,
   segment: string,
-  lan: string
+  lan: string,
+  hasMail: boolean,
+  hasAudit: boolean,
+  hasPreview: boolean,
+  worthySite: boolean,
+  hasEmail: boolean,
+  hasDomain: boolean
 ): boolean {
   // Segment filter
   if (segment && company.segment !== segment) {
@@ -178,6 +198,13 @@ function matchesFilters(
   if (lan && company.lan !== lan) {
     return false;
   }
+
+  if (hasMail && !flags.hasMail) return false;
+  if (hasAudit && !flags.hasAudit) return false;
+  if (hasPreview && !flags.hasPreview) return false;
+  if (worthySite && !flags.worthySite) return false;
+  if (hasEmail && !flags.hasEmail) return false;
+  if (hasDomain && !flags.hasDomain) return false;
 
   // Text search
   if (query) {
@@ -211,10 +238,17 @@ function matchesPersonFilters(person: NormalizedPerson, query: string): boolean 
     person.foretagsnamn,
     person.orgnr,
     person.ort,
+    person.mapp,
   ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
   
   return searchText.includes(query);
+}
+
+function parseBooleanParam(value: string | null): boolean {
+  if (!value) return false;
+  const v = value.toLowerCase();
+  return v === "1" || v === "true" || v === "yes";
 }
