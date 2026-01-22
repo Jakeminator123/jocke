@@ -176,8 +176,8 @@ export default function HomePage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && latestDate) {
-              router.push(`/date/${latestDate}?search=${encodeURIComponent(searchQuery)}`);
+            if (e.key === "Enter" && searchQuery.trim()) {
+              router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
             }
           }}
           className="w-full pl-12 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 transition-colors"
@@ -207,7 +207,7 @@ export default function HomePage() {
               .map(([segment, count]) => (
                 <button
                   key={segment}
-                  onClick={() => latestDate && router.push(`/date/${latestDate}?segment=${encodeURIComponent(segment)}`)}
+                  onClick={() => router.push(`/search?segment=${encodeURIComponent(segment)}`)}
                   className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
                 >
                   {segment} <span className="text-zinc-400">({count})</span>
@@ -228,7 +228,7 @@ export default function HomePage() {
               .map(([lan, count]) => (
                 <button
                   key={lan}
-                  onClick={() => latestDate && router.push(`/date/${latestDate}?lan=${encodeURIComponent(lan)}`)}
+                  onClick={() => router.push(`/search?lan=${encodeURIComponent(lan)}`)}
                   className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
                 >
                   {lan} <span className="text-zinc-400">({count})</span>
