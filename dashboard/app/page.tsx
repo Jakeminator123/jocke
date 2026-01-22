@@ -25,26 +25,23 @@ interface DateFolder {
   formatted: string;
 }
 
-interface DateStats {
+interface TotalStats {
   totalCompanies: number;
   totalPeople: number;
   totalMails: number;
   totalAudits: number;
-  hasPeopleData: boolean;
-  hasMailData: boolean;
   companiesWithDomain: number;
   companiesWithEmail: number;
   companiesWithPhone: number;
-  companiesWithPreview: number;
+  totalDates: number;
   segments: Record<string, number>;
   lans: Record<string, number>;
 }
 
 export default function HomePage() {
   const [dates, setDates] = useState<DateFolder[]>([]);
-  const [stats, setStats] = useState<DateStats | null>(null);
+  const [stats, setStats] = useState<TotalStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showAdmin, setShowAdmin] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -54,13 +51,8 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchDates();
+    fetchTotals();
   }, []);
-
-  useEffect(() => {
-    if (selectedDate) {
-      fetchDateData(selectedDate);
-    }
-  }, [selectedDate]);
 
   const fetchDates = async () => {
     try {
@@ -68,9 +60,6 @@ export default function HomePage() {
       if (response.ok) {
         const data = await response.json();
         setDates(data.dates);
-        if (data.dates.length > 0) {
-          setSelectedDate(data.dates[0].date);
-        }
       }
     } catch (error) {
       console.error("Error fetching dates:", error);
@@ -79,15 +68,15 @@ export default function HomePage() {
     }
   };
 
-  const fetchDateData = async (date: string) => {
+  const fetchTotals = async () => {
     try {
-      const response = await fetch(`/api/data/${date}`);
+      const response = await fetch("/api/data/totals");
       if (response.ok) {
         const data = await response.json();
-        setStats(data.stats);
+        setStats(data);
       }
     } catch (error) {
-      console.error("Error fetching date data:", error);
+      console.error("Error fetching totals:", error);
     }
   };
 
@@ -129,7 +118,7 @@ export default function HomePage() {
         setDeleteConfirm(false);
         setAdminSecret("");
         fetchDates();
-        setStats(null);
+        fetchTotals();
       } else {
         alert(`Fel: ${result.error || "Kunde inte radera"}`);
       }
@@ -140,6 +129,9 @@ export default function HomePage() {
       setDeleting(false);
     }
   };
+
+  // Get latest date for search navigation
+  const latestDate = dates.length > 0 ? dates[0].date : null;
 
   const formatDate = (dateStr: string) => {
     const year = parseInt(dateStr.slice(0, 4));
@@ -184,8 +176,8 @@ export default function HomePage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && selectedDate) {
-              router.push(`/date/${selectedDate}?search=${encodeURIComponent(searchQuery)}`);
+            if (e.key === "Enter" && latestDate) {
+              router.push(`/date/${latestDate}?search=${encodeURIComponent(searchQuery)}`);
             }
           }}
           className="w-full pl-12 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 transition-colors"
@@ -215,7 +207,7 @@ export default function HomePage() {
               .map(([segment, count]) => (
                 <button
                   key={segment}
-                  onClick={() => selectedDate && router.push(`/date/${selectedDate}?segment=${encodeURIComponent(segment)}`)}
+                  onClick={() => latestDate && router.push(`/date/${latestDate}?segment=${encodeURIComponent(segment)}`)}
                   className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
                 >
                   {segment} <span className="text-zinc-400">({count})</span>
@@ -236,7 +228,7 @@ export default function HomePage() {
               .map(([lan, count]) => (
                 <button
                   key={lan}
-                  onClick={() => selectedDate && router.push(`/date/${selectedDate}?lan=${encodeURIComponent(lan)}`)}
+                  onClick={() => latestDate && router.push(`/date/${latestDate}?lan=${encodeURIComponent(lan)}`)}
                   className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-full text-sm transition-colors"
                 >
                   {lan} <span className="text-zinc-400">({count})</span>
@@ -253,12 +245,8 @@ export default function HomePage() {
           {dates.map((dateFolder) => (
             <div
               key={dateFolder.date}
-              className={`flex items-center justify-between p-4 bg-zinc-900 rounded-lg border transition-colors cursor-pointer ${
-                selectedDate === dateFolder.date 
-                  ? "border-blue-500" 
-                  : "border-zinc-800 hover:border-zinc-700"
-              }`}
-              onClick={() => setSelectedDate(dateFolder.date)}
+              className="flex items-center justify-between p-4 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-colors cursor-pointer"
+              onClick={() => handleDateClick(dateFolder.date)}
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center">
