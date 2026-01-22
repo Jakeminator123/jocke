@@ -11,23 +11,38 @@ import {
   Globe,
   Mail,
   Phone,
-  X
+  ClipboardCheck,
+  X,
+  ExternalLink
 } from "lucide-react";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
 import Link from "next/link";
-import type { NormalizedCompany, NormalizedPerson } from "@/lib/normalize";
+import type { 
+  NormalizedCompany, 
+  NormalizedPerson,
+  NormalizedMail,
+  NormalizedAudit 
+} from "@/lib/normalize";
 
 interface DataStats {
   totalCompanies: number;
   totalPeople: number;
+  totalMails: number;
+  totalAudits: number;
   hasPeopleData: boolean;
+  hasMailData: boolean;
+  hasAuditData: boolean;
   companiesWithDomain: number;
   companiesWithEmail: number;
   companiesWithPhone: number;
+  companiesWithPreview: number;
   segments: Record<string, number>;
   lans: Record<string, number>;
+  domainStatuses: Record<string, number>;
 }
+
+type TabType = "companies" | "people" | "mails" | "audits";
 
 export default function DateDetailPage() {
   const params = useParams();
@@ -36,10 +51,12 @@ export default function DateDetailPage() {
   
   const [companies, setCompanies] = useState<NormalizedCompany[]>([]);
   const [people, setPeople] = useState<NormalizedPerson[]>([]);
+  const [mails, setMails] = useState<NormalizedMail[]>([]);
+  const [audits, setAudits] = useState<NormalizedAudit[]>([]);
   const [stats, setStats] = useState<DataStats | null>(null);
   const [source, setSource] = useState<string>("unknown");
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"companies" | "people">("companies");
+  const [activeTab, setActiveTab] = useState<TabType>("companies");
   const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
   const [segmentFilter, setSegmentFilter] = useState(searchParams.get("segment") || "");
   const [lanFilter, setLanFilter] = useState(searchParams.get("lan") || "");
@@ -57,6 +74,8 @@ export default function DateDetailPage() {
         const data = await response.json();
         setCompanies(data.companies || []);
         setPeople(data.people || []);
+        setMails(data.mails || []);
+        setAudits(data.audits || []);
         setStats(data.stats);
         setSource(data.source);
       }
@@ -113,6 +132,34 @@ export default function DateDetailPage() {
     });
   }, [people, searchQuery]);
 
+  const filteredMails = useMemo(() => {
+    if (!searchQuery.trim()) return mails;
+    const q = searchQuery.toLowerCase();
+    return mails.filter((m) => {
+      const text = [
+        m.company,
+        m.email,
+        m.subject,
+        m.folder
+      ].filter(Boolean).join(" ").toLowerCase();
+      return text.includes(q);
+    });
+  }, [mails, searchQuery]);
+
+  const filteredAudits = useMemo(() => {
+    if (!searchQuery.trim()) return audits;
+    const q = searchQuery.toLowerCase();
+    return audits.filter((a) => {
+      const text = [
+        a.foretagsnamn,
+        a.hemsida,
+        a.bransch,
+        a.mapp
+      ].filter(Boolean).join(" ").toLowerCase();
+      return text.includes(q);
+    });
+  }, [audits, searchQuery]);
+
   const clearFilters = () => {
     setSearchQuery("");
     setSegmentFilter("");
@@ -150,7 +197,7 @@ export default function DateDetailPage() {
           <div>
             <h1 className="text-2xl font-bold">{formatDate(date)}</h1>
             <p className="text-zinc-400 text-sm">
-              {stats?.totalCompanies} företag, {stats?.totalPeople} personer | {source}
+              {stats?.totalCompanies} företag, {stats?.totalPeople} personer, {stats?.totalMails} mail | {source}
             </p>
           </div>
         </div>
@@ -165,11 +212,13 @@ export default function DateDetailPage() {
 
       {/* Stats */}
       {stats && (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
           <StatCard icon={Building2} label="Företag" value={stats.totalCompanies} />
           <StatCard icon={Users} label="Personer" value={stats.totalPeople} />
+          <StatCard icon={Mail} label="Mail" value={stats.totalMails} />
+          <StatCard icon={ClipboardCheck} label="Audits" value={stats.totalAudits} />
           <StatCard icon={Globe} label="Med domän" value={stats.companiesWithDomain} />
-          <StatCard icon={Mail} label="Med e-post" value={stats.companiesWithEmail} />
+          <StatCard icon={ExternalLink} label="Med preview" value={stats.companiesWithPreview} />
           <StatCard icon={Phone} label="Med telefon" value={stats.companiesWithPhone} />
         </div>
       )}
@@ -180,7 +229,7 @@ export default function DateDetailPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
           <input
             type="text"
-            placeholder="Sök företag eller person..."
+            placeholder="Sök företag, person, mail..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-zinc-600 transition-colors"
@@ -233,41 +282,77 @@ export default function DateDetailPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-zinc-800">
-        <button
+      <div className="flex gap-2 border-b border-zinc-800 overflow-x-auto">
+        <TabButton 
+          active={activeTab === "companies"} 
           onClick={() => setActiveTab("companies")}
-          className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
-            activeTab === "companies"
-              ? "border-blue-500 text-white"
-              : "border-transparent text-zinc-400 hover:text-white"
-          }`}
-        >
-          <Building2 className="w-4 h-4" />
-          Företag ({filteredCompanies.length})
-        </button>
+          icon={Building2}
+          label="Företag"
+          count={filteredCompanies.length}
+        />
         {people.length > 0 && (
-          <button
+          <TabButton 
+            active={activeTab === "people"} 
             onClick={() => setActiveTab("people")}
-            className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
-              activeTab === "people"
-                ? "border-blue-500 text-white"
-                : "border-transparent text-zinc-400 hover:text-white"
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            Personer ({filteredPeople.length})
-          </button>
+            icon={Users}
+            label="Personer"
+            count={filteredPeople.length}
+          />
+        )}
+        {mails.length > 0 && (
+          <TabButton 
+            active={activeTab === "mails"} 
+            onClick={() => setActiveTab("mails")}
+            icon={Mail}
+            label="Mail"
+            count={filteredMails.length}
+          />
+        )}
+        {audits.length > 0 && (
+          <TabButton 
+            active={activeTab === "audits"} 
+            onClick={() => setActiveTab("audits")}
+            icon={ClipboardCheck}
+            label="Audits"
+            count={filteredAudits.length}
+          />
         )}
       </div>
 
       {/* Data Tables */}
-      {activeTab === "companies" && (
-        <CompaniesTable companies={filteredCompanies} />
-      )}
-      {activeTab === "people" && people.length > 0 && (
-        <PeopleTable people={filteredPeople} />
-      )}
+      {activeTab === "companies" && <CompaniesTable companies={filteredCompanies} />}
+      {activeTab === "people" && <PeopleTable people={filteredPeople} />}
+      {activeTab === "mails" && <MailsTable mails={filteredMails} />}
+      {activeTab === "audits" && <AuditsTable audits={filteredAudits} />}
     </div>
+  );
+}
+
+function TabButton({ 
+  active, 
+  onClick, 
+  icon: Icon, 
+  label, 
+  count 
+}: { 
+  active: boolean; 
+  onClick: () => void; 
+  icon: React.ElementType; 
+  label: string; 
+  count: number;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors whitespace-nowrap ${
+        active
+          ? "border-blue-500 text-white"
+          : "border-transparent text-zinc-400 hover:text-white"
+      }`}
+    >
+      <Icon className="w-4 h-4" />
+      {label} ({count})
+    </button>
   );
 }
 
@@ -285,11 +370,7 @@ function StatCard({ icon: Icon, label, value }: { icon: React.ElementType; label
 
 function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
   if (companies.length === 0) {
-    return (
-      <div className="text-center py-12 text-zinc-400">
-        Inga företag matchar din sökning
-      </div>
-    );
+    return <EmptyState message="Inga företag matchar din sökning" />;
   }
 
   return (
@@ -304,6 +385,7 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
               <th className="text-left px-4 py-3 font-medium">Län</th>
               <th className="text-left px-4 py-3 font-medium">Domän</th>
               <th className="text-left px-4 py-3 font-medium">E-post</th>
+              <th className="text-left px-4 py-3 font-medium">Status</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800">
@@ -311,11 +393,7 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
               <tr key={idx} className="hover:bg-zinc-800/50 transition-colors">
                 <td className="px-4 py-3">
                   <div className="font-medium">{company.foretagsnamn}</div>
-                  {company.verksamhet && (
-                    <div className="text-xs text-zinc-400 truncate max-w-[300px]">
-                      {company.verksamhet}
-                    </div>
-                  )}
+                  <div className="text-xs text-zinc-500">{company.mapp}</div>
                 </td>
                 <td className="px-4 py-3 font-mono text-zinc-400">{company.orgnr}</td>
                 <td className="px-4 py-3">
@@ -335,8 +413,11 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
                     <span className="text-zinc-600">—</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-zinc-400">
+                <td className="px-4 py-3 text-zinc-400 max-w-[200px] truncate">
                   {company.epost || company.emails_found || "—"}
+                </td>
+                <td className="px-4 py-3">
+                  <DomainStatusBadge status={company.domain_status} />
                 </td>
               </tr>
             ))}
@@ -344,9 +425,7 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
         </table>
       </div>
       {companies.length > 100 && (
-        <div className="px-4 py-3 text-sm text-zinc-400 text-center border-t border-zinc-800">
-          Visar 100 av {companies.length} företag
-        </div>
+        <TableFooter shown={100} total={companies.length} type="företag" />
       )}
     </div>
   );
@@ -354,11 +433,7 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
 
 function PeopleTable({ people }: { people: NormalizedPerson[] }) {
   if (people.length === 0) {
-    return (
-      <div className="text-center py-12 text-zinc-400">
-        Inga personer matchar din sökning
-      </div>
-    );
+    return <EmptyState message="Inga personer matchar din sökning" />;
   }
 
   return (
@@ -384,23 +459,11 @@ function PeopleTable({ people }: { people: NormalizedPerson[] }) {
                   </div>
                 </td>
                 <td className="px-4 py-3">
-                  {person.roll && (
-                    <span className={`px-2 py-1 rounded text-xs ${
-                      person.roll.includes("Styrelseledamot")
-                        ? "bg-blue-900/50 text-blue-300"
-                        : person.roll.includes("Styrelsesuppleant")
-                        ? "bg-purple-900/50 text-purple-300"
-                        : "bg-zinc-800 text-zinc-300"
-                    }`}>
-                      {person.roll}
-                    </span>
-                  )}
+                  <RoleBadge role={person.roll} />
                 </td>
                 <td className="px-4 py-3">
                   <div className="font-medium">{person.foretagsnamn || "—"}</div>
-                  {person.orgnr && (
-                    <div className="text-xs text-zinc-400 font-mono">{person.orgnr}</div>
-                  )}
+                  <div className="text-xs text-zinc-500">{person.kungorelse_id}</div>
                 </td>
                 <td className="px-4 py-3 text-zinc-400">{person.ort || "—"}</td>
               </tr>
@@ -409,10 +472,179 @@ function PeopleTable({ people }: { people: NormalizedPerson[] }) {
         </table>
       </div>
       {people.length > 100 && (
-        <div className="px-4 py-3 text-sm text-zinc-400 text-center border-t border-zinc-800">
-          Visar 100 av {people.length} personer
-        </div>
+        <TableFooter shown={100} total={people.length} type="personer" />
       )}
+    </div>
+  );
+}
+
+function MailsTable({ mails }: { mails: NormalizedMail[] }) {
+  if (mails.length === 0) {
+    return <EmptyState message="Inga mail matchar din sökning" />;
+  }
+
+  return (
+    <div className="bg-zinc-900 rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-zinc-800">
+            <tr>
+              <th className="text-left px-4 py-3 font-medium">Företag</th>
+              <th className="text-left px-4 py-3 font-medium">E-post</th>
+              <th className="text-left px-4 py-3 font-medium">Ämne</th>
+              <th className="text-left px-4 py-3 font-medium">Status</th>
+              <th className="text-left px-4 py-3 font-medium">Preview</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-zinc-800">
+            {mails.slice(0, 100).map((mail, idx) => (
+              <tr key={idx} className="hover:bg-zinc-800/50 transition-colors">
+                <td className="px-4 py-3">
+                  <div className="font-medium">{mail.company}</div>
+                  <div className="text-xs text-zinc-500">{mail.folder}</div>
+                </td>
+                <td className="px-4 py-3 text-zinc-400">{mail.email}</td>
+                <td className="px-4 py-3 max-w-[300px] truncate">{mail.subject}</td>
+                <td className="px-4 py-3">
+                  <DomainStatusBadge status={mail.domain_status} />
+                </td>
+                <td className="px-4 py-3">
+                  {mail.site_preview_url ? (
+                    <a 
+                      href={mail.site_preview_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      Visa
+                    </a>
+                  ) : (
+                    <span className="text-zinc-600">—</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {mails.length > 100 && (
+        <TableFooter shown={100} total={mails.length} type="mail" />
+      )}
+    </div>
+  );
+}
+
+function AuditsTable({ audits }: { audits: NormalizedAudit[] }) {
+  if (audits.length === 0) {
+    return <EmptyState message="Inga audits matchar din sökning" />;
+  }
+
+  return (
+    <div className="bg-zinc-900 rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-zinc-800">
+            <tr>
+              <th className="text-left px-4 py-3 font-medium">Företag</th>
+              <th className="text-left px-4 py-3 font-medium">Hemsida</th>
+              <th className="text-left px-4 py-3 font-medium">Datum</th>
+              <th className="text-left px-4 py-3 font-medium">Helhet</th>
+              <th className="text-left px-4 py-3 font-medium">Design</th>
+              <th className="text-left px-4 py-3 font-medium">SEO</th>
+              <th className="text-left px-4 py-3 font-medium">Mobil</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-zinc-800">
+            {audits.slice(0, 100).map((audit, idx) => (
+              <tr key={idx} className="hover:bg-zinc-800/50 transition-colors">
+                <td className="px-4 py-3">
+                  <div className="font-medium">{audit.foretagsnamn}</div>
+                  <div className="text-xs text-zinc-500">{audit.mapp}</div>
+                </td>
+                <td className="px-4 py-3">
+                  {audit.hemsida ? (
+                    <a 
+                      href={audit.hemsida} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      {new URL(audit.hemsida).hostname}
+                    </a>
+                  ) : (
+                    <span className="text-zinc-600">—</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-zinc-400">{audit.audit_datum || "—"}</td>
+                <td className="px-4 py-3"><ScoreBadge score={audit.helhet} /></td>
+                <td className="px-4 py-3"><ScoreBadge score={audit.design} /></td>
+                <td className="px-4 py-3"><ScoreBadge score={audit.seo} /></td>
+                <td className="px-4 py-3"><ScoreBadge score={audit.mobil} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {audits.length > 100 && (
+        <TableFooter shown={100} total={audits.length} type="audits" />
+      )}
+    </div>
+  );
+}
+
+function DomainStatusBadge({ status }: { status: string | null }) {
+  if (!status) return <span className="text-zinc-600">—</span>;
+  
+  const colors: Record<string, string> = {
+    verified: "bg-green-900/50 text-green-300",
+    unknown: "bg-zinc-800 text-zinc-400",
+    wrong_company: "bg-yellow-900/50 text-yellow-300",
+  };
+  
+  return (
+    <span className={`px-2 py-1 rounded text-xs ${colors[status] || colors.unknown}`}>
+      {status}
+    </span>
+  );
+}
+
+function RoleBadge({ role }: { role: string | null }) {
+  if (!role) return <span className="text-zinc-600">—</span>;
+  
+  const color = role.includes("Styrelseledamot")
+    ? "bg-blue-900/50 text-blue-300"
+    : role.includes("Styrelsesuppleant")
+    ? "bg-purple-900/50 text-purple-300"
+    : "bg-zinc-800 text-zinc-300";
+    
+  return <span className={`px-2 py-1 rounded text-xs ${color}`}>{role}</span>;
+}
+
+function ScoreBadge({ score }: { score: number | null }) {
+  if (score === null || score === undefined) {
+    return <span className="text-zinc-600">—</span>;
+  }
+  
+  const color = score >= 7 ? "text-green-400" : 
+                score >= 4 ? "text-yellow-400" : "text-red-400";
+  
+  return <span className={`font-bold ${color}`}>{score.toFixed(1)}</span>;
+}
+
+function EmptyState({ message }: { message: string }) {
+  return (
+    <div className="text-center py-12 text-zinc-400">
+      {message}
+    </div>
+  );
+}
+
+function TableFooter({ shown, total, type }: { shown: number; total: number; type: string }) {
+  return (
+    <div className="px-4 py-3 text-sm text-zinc-400 text-center border-t border-zinc-800">
+      Visar {shown} av {total} {type}
     </div>
   );
 }

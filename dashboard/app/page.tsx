@@ -25,10 +25,14 @@ interface DateFolder {
 interface DateStats {
   totalCompanies: number;
   totalPeople: number;
+  totalMails: number;
+  totalAudits: number;
   hasPeopleData: boolean;
+  hasMailData: boolean;
   companiesWithDomain: number;
   companiesWithEmail: number;
   companiesWithPhone: number;
+  companiesWithPreview: number;
   segments: Record<string, number>;
   lans: Record<string, number>;
 }

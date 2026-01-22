@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
-import { existsSync } from "fs";
+import { readdirSync } from "fs";
 import { isAuthenticated } from "@/lib/auth";
 import Database from "better-sqlite3";
 import { parseExcelFile } from "@/lib/excel";
@@ -8,9 +8,25 @@ import { getExistingDateDir } from "@/lib/data-paths";
 import {
   normalizeCompanies,
   normalizePeople,
+  normalizeMails,
+  normalizeAudits,
+  normalizeEvaluations,
+  normalizeSummary,
   calculateStats,
+  findSheetByNames,
+  COMPANY_SHEET_NAMES,
+  PEOPLE_SHEET_NAMES,
+  MAIL_SHEET_NAMES,
+  AUDIT_SHEET_NAMES,
+  EVALUATION_SHEET_NAMES,
+  SUMMARY_SHEET_NAMES,
   type NormalizedCompany,
   type NormalizedPerson,
+  type NormalizedMail,
+  type NormalizedAudit,
+  type NormalizedEvaluation,
+  type NormalizedSummary,
+  type NormalizedData,
 } from "@/lib/normalize";
 
 export async function GET(
@@ -40,56 +56,86 @@ export async function GET(
       );
     }
 
-    // Priority: companies_*.db > data.db > final_*.xlsx > jocke.xlsx > kungorelser_*.xlsx
-    const companiesDbPath = join(dateDir, `companies_${date}.db`);
-    const dbPath = join(dateDir, "data.db");
-    const finalExcelPath = join(dateDir, `final_${date}.xlsx`);
-    const jockePath = join(dateDir, "jocke.xlsx");
-    const excelPath = join(dateDir, `kungorelser_${date}.xlsx`);
+    // Initialize data structure
+    const data: NormalizedData = {
+      companies: [],
+      people: [],
+      mails: [],
+      audits: [],
+      evaluations: [],
+      summary: null,
+    };
 
-    let companies: NormalizedCompany[] = [];
-    let people: NormalizedPerson[] = [];
     let source = "unknown";
 
-    if (existsSync(companiesDbPath)) {
-      const result = getDataFromSQLite(companiesDbPath);
-      companies = result.companies;
-      people = result.people;
-      source = "sqlite";
-    } else if (existsSync(dbPath)) {
-      const result = getDataFromSQLite(dbPath);
-      companies = result.companies;
-      people = result.people;
-      source = "sqlite";
-    } else if (existsSync(finalExcelPath)) {
-      const result = await getDataFromExcel(finalExcelPath);
-      companies = result.companies;
-      people = result.people;
-      source = "excel-final";
-    } else if (existsSync(jockePath)) {
-      const result = await getDataFromExcel(jockePath);
-      companies = result.companies;
-      people = result.people;
-      source = "excel-jocke";
-    } else if (existsSync(excelPath)) {
-      const result = await getDataFromExcel(excelPath);
-      companies = result.companies;
-      people = result.people;
-      source = "excel-kungorelser";
-    } else {
-      return NextResponse.json(
-        { error: "Data not found for this date" },
-        { status: 404 }
-      );
+    // Find and process all data files
+    const files = readdirSync(dateDir);
+    
+    // Process SQLite databases
+    for (const file of files) {
+      if (file.endsWith(".db")) {
+        const dbPath = join(dateDir, file);
+        const dbData = getDataFromSQLite(dbPath);
+        data.companies.push(...dbData.companies);
+        data.people.push(...dbData.people);
+        source = "sqlite";
+      }
     }
 
-    const stats = calculateStats(companies, people);
+    // Process Excel files
+    for (const file of files) {
+      if (file.endsWith(".xlsx")) {
+        const xlsxPath = join(dateDir, file);
+        const xlsxData = await getDataFromExcel(xlsxPath, file);
+        
+        // Merge data (avoid duplicates by checking if we already have data)
+        if (xlsxData.companies.length > 0) {
+          // If from final_*.xlsx or kungorelser_*.xlsx, these are the main company sources
+          if (file.includes("final") || file.includes("kungorelser")) {
+            if (data.companies.length === 0) {
+              data.companies = xlsxData.companies;
+            }
+          }
+        }
+        
+        if (xlsxData.people.length > 0 && data.people.length === 0) {
+          data.people = xlsxData.people;
+        }
+        
+        // Always add mails and audits (these are additive)
+        data.mails.push(...xlsxData.mails);
+        data.audits.push(...xlsxData.audits);
+        
+        if (xlsxData.evaluations.length > 0 && data.evaluations.length === 0) {
+          data.evaluations = xlsxData.evaluations;
+        }
+        
+        if (xlsxData.summary && !data.summary) {
+          data.summary = xlsxData.summary;
+        }
+        
+        if (source === "unknown") {
+          source = file.includes("final") ? "excel-final" : 
+                   file.includes("mail_ready") ? "excel-mail" : "excel";
+        }
+      }
+    }
+
+    // Deduplicate mails and audits by key
+    data.mails = deduplicateByKey(data.mails, "folder");
+    data.audits = deduplicateByKey(data.audits, "mapp");
+
+    const stats = calculateStats(data);
 
     return NextResponse.json({
       date,
       stats,
-      companies,
-      people,
+      companies: data.companies,
+      people: data.people,
+      mails: data.mails,
+      audits: data.audits,
+      evaluations: data.evaluations,
+      summary: data.summary,
       source,
     });
   } catch (error) {
@@ -98,13 +144,22 @@ export async function GET(
   }
 }
 
+function deduplicateByKey<T extends Record<string, unknown>>(items: T[], key: string): T[] {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const k = String(item[key] || "");
+    if (!k || seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}
+
 function getDataFromSQLite(dbPath: string): {
   companies: NormalizedCompany[];
   people: NormalizedPerson[];
 } {
   const db = new Database(dbPath, { readonly: true });
 
-  // Get table names to handle different schemas
   const tables = db
     .prepare("SELECT name FROM sqlite_master WHERE type='table'")
     .all() as { name: string }[];
@@ -113,12 +168,10 @@ function getDataFromSQLite(dbPath: string): {
   let rawCompanies: Record<string, unknown>[] = [];
   let rawPeople: Record<string, unknown>[] = [];
 
-  // Try different table names for companies
   if (tableNames.includes("companies")) {
     rawCompanies = db.prepare("SELECT * FROM companies").all() as Record<string, unknown>[];
   }
 
-  // Try different table names for people
   if (tableNames.includes("people")) {
     rawPeople = db.prepare("SELECT * FROM people").all() as Record<string, unknown>[];
   } else if (tableNames.includes("personer")) {
@@ -133,34 +186,46 @@ function getDataFromSQLite(dbPath: string): {
   };
 }
 
-async function getDataFromExcel(filePath: string): Promise<{
+async function getDataFromExcel(filePath: string, fileName: string): Promise<{
   companies: NormalizedCompany[];
   people: NormalizedPerson[];
+  mails: NormalizedMail[];
+  audits: NormalizedAudit[];
+  evaluations: NormalizedEvaluation[];
+  summary: NormalizedSummary | null;
 }> {
   const { sheets, sheetNames } = await parseExcelFile(filePath);
 
-  // Find company data - try multiple sheet names
-  let rawCompanies: Record<string, unknown>[] = [];
-  const companySheetNames = ["Huvuddata", "Data", "Companies", sheetNames[0]];
-  for (const name of companySheetNames) {
-    if (name && sheets[name] && (sheets[name] as unknown[]).length > 0) {
-      rawCompanies = sheets[name] as Record<string, unknown>[];
-      break;
+  // Find company data
+  let rawCompanies = findSheetByNames(sheets, COMPANY_SHEET_NAMES);
+  if (rawCompanies.length === 0 && sheetNames.length > 0) {
+    // Use first sheet as fallback for kungorelser files
+    if (fileName.includes("kungorelser")) {
+      rawCompanies = sheets[sheetNames[0]] || [];
     }
   }
 
   // Find people data
-  let rawPeople: Record<string, unknown>[] = [];
-  const peopleSheetNames = ["Personer", "People", "Styrelse"];
-  for (const name of peopleSheetNames) {
-    if (sheets[name] && (sheets[name] as unknown[]).length > 0) {
-      rawPeople = sheets[name] as Record<string, unknown>[];
-      break;
-    }
-  }
+  const rawPeople = findSheetByNames(sheets, PEOPLE_SHEET_NAMES);
+
+  // Find mail data
+  const rawMails = findSheetByNames(sheets, MAIL_SHEET_NAMES);
+
+  // Find audit data
+  const rawAudits = findSheetByNames(sheets, AUDIT_SHEET_NAMES);
+
+  // Find evaluation data
+  const rawEvaluations = findSheetByNames(sheets, EVALUATION_SHEET_NAMES);
+
+  // Find summary data
+  const rawSummary = findSheetByNames(sheets, SUMMARY_SHEET_NAMES);
 
   return {
-    companies: normalizeCompanies(rawCompanies),
-    people: normalizePeople(rawPeople),
+    companies: normalizeCompanies(rawCompanies as Record<string, unknown>[]),
+    people: normalizePeople(rawPeople as Record<string, unknown>[]),
+    mails: normalizeMails(rawMails as Record<string, unknown>[]),
+    audits: normalizeAudits(rawAudits as Record<string, unknown>[]),
+    evaluations: normalizeEvaluations(rawEvaluations as Record<string, unknown>[]),
+    summary: normalizeSummary(rawSummary as Record<string, unknown>[]),
   };
 }
