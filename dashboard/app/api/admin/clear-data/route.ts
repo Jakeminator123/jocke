@@ -3,7 +3,8 @@ import { rm, readdir } from "fs/promises";
 import { existsSync } from "fs";
 import { join } from "path";
 import { isAuthenticated } from "@/lib/auth";
-import { PERSISTENT_DISK_DIR } from "@/lib/data-paths";
+import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR } from "@/lib/data-paths";
+import { getIndexDbPath } from "@/lib/index-db";
 
 /**
  * DELETE /api/admin/clear-data
@@ -32,8 +33,13 @@ export async function DELETE(request: NextRequest) {
       }
     }
 
-    // Check if data directory exists
-    if (!existsSync(PERSISTENT_DISK_DIR)) {
+    const dataDirs = existsSync(PERSISTENT_DISK_DIR)
+      ? [PERSISTENT_DISK_DIR]
+      : existsSync(LOCAL_DATA_DIR)
+      ? [LOCAL_DATA_DIR]
+      : [];
+
+    if (dataDirs.length === 0) {
       return NextResponse.json({
         success: true,
         message: "No data directory found - nothing to delete",
@@ -41,27 +47,42 @@ export async function DELETE(request: NextRequest) {
       });
     }
 
-    // Get list of date folders before deletion
-    const entries = await readdir(PERSISTENT_DISK_DIR, { withFileTypes: true });
-    const dateFolders = entries
-      .filter((e) => e.isDirectory() && /^\d{8}$/.test(e.name))
-      .map((e) => e.name);
+    const dateFolders: string[] = [];
+    for (const dataDir of dataDirs) {
+      const entries = await readdir(dataDir, { withFileTypes: true });
+      entries
+        .filter((e) => e.isDirectory() && /^\d{8}$/.test(e.name))
+        .forEach((e) => dateFolders.push(e.name));
+    }
 
     // Delete each date folder
     let deletedCount = 0;
     const errors: string[] = [];
 
     for (const folder of dateFolders) {
-      const folderPath = join(PERSISTENT_DISK_DIR, folder);
-      try {
-        await rm(folderPath, { recursive: true, force: true });
-        deletedCount++;
-        console.log(`Deleted: ${folderPath}`);
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        errors.push(`${folder}: ${msg}`);
-        console.error(`Failed to delete ${folderPath}:`, err);
+      for (const dataDir of dataDirs) {
+        const folderPath = join(dataDir, folder);
+        try {
+          await rm(folderPath, { recursive: true, force: true });
+          deletedCount++;
+          console.log(`Deleted: ${folderPath}`);
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          errors.push(`${folder}: ${msg}`);
+          console.error(`Failed to delete ${folderPath}:`, err);
+        }
       }
+    }
+
+    // Remove SQLite index (if present)
+    try {
+      const indexPath = getIndexDbPath();
+      if (existsSync(indexPath)) {
+        await rm(indexPath, { force: true });
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      errors.push(`index: ${msg}`);
     }
 
     return NextResponse.json({
@@ -91,16 +112,17 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (!existsSync(PERSISTENT_DISK_DIR)) {
+    const dataDir = existsSync(PERSISTENT_DISK_DIR) ? PERSISTENT_DISK_DIR : LOCAL_DATA_DIR;
+    if (!existsSync(dataDir)) {
       return NextResponse.json({
-        dataDir: PERSISTENT_DISK_DIR,
+        dataDir,
         exists: false,
         folders: [],
         totalSize: 0,
       });
     }
 
-    const entries = await readdir(PERSISTENT_DISK_DIR, { withFileTypes: true });
+    const entries = await readdir(dataDir, { withFileTypes: true });
     const dateFolders = entries
       .filter((e) => e.isDirectory() && /^\d{8}$/.test(e.name))
       .map((e) => e.name)
@@ -108,7 +130,7 @@ export async function GET() {
       .reverse();
 
     return NextResponse.json({
-      dataDir: PERSISTENT_DISK_DIR,
+      dataDir,
       exists: true,
       folders: dateFolders,
       count: dateFolders.length,

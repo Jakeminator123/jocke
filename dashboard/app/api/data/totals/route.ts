@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
-import { join } from "path";
-import { readdirSync } from "fs";
 import { isAuthenticated } from "@/lib/auth";
-import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, BUNDLES_DIR } from "@/lib/data-paths";
-import { existsSync } from "fs";
+import { getAllDateDirPaths } from "@/lib/data-paths";
 import { readDateData } from "@/lib/data-reader";
+import { ensureIndexDb, getIndexedDates, indexDateData } from "@/lib/index-db";
 
 interface TotalStats {
   totalCompanies: number;
@@ -30,22 +28,11 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Find all date directories
-    const dateDirs: string[] = [];
-    
-    for (const baseDir of [PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, BUNDLES_DIR]) {
-      if (existsSync(baseDir)) {
-        try {
-          const entries = readdirSync(baseDir, { withFileTypes: true });
-          for (const entry of entries) {
-            if (entry.isDirectory() && /^\d{8}$/.test(entry.name)) {
-              dateDirs.push(join(baseDir, entry.name));
-            }
-          }
-        } catch {
-          // Skip if can't read
-        }
-      }
+    const dateDirs = await getAllDateDirPaths();
+
+    if (dateDirs.length > 0) {
+      await ensureIndexForDates(dateDirs);
+      return NextResponse.json(queryTotalsFromIndex(dateDirs.length));
     }
 
     // Aggregate stats
@@ -162,5 +149,111 @@ export async function GET() {
   } catch (error) {
     console.error("Error calculating totals:", error);
     return NextResponse.json({ error: "Failed to calculate totals" }, { status: 500 });
+  }
+}
+
+function queryTotalsFromIndex(totalDates: number) {
+  const db = ensureIndexDb();
+
+  const companyKey = "COALESCE(NULLIF(mapp,''), NULLIF(orgnr,''))";
+
+  const totalCompanies = db.prepare(`SELECT COUNT(DISTINCT ${companyKey}) as count FROM companies`).get() as { count: number };
+  const totalPeople = db.prepare("SELECT COUNT(DISTINCT personnummer || '-' || kungorelse_id) as count FROM people").get() as { count: number };
+  const totalMails = db.prepare("SELECT COUNT(*) as count FROM mails").get() as { count: number };
+  const totalAudits = db.prepare("SELECT COUNT(*) as count FROM audits").get() as { count: number };
+
+  const companiesWithDomain = db.prepare(
+    `SELECT COUNT(DISTINCT ${companyKey}) as count FROM companies WHERE domain_verified <> '' OR domain_guess <> ''`
+  ).get() as { count: number };
+
+  const companiesWithEmail = db.prepare(
+    `SELECT COUNT(DISTINCT ${companyKey}) as count FROM companies WHERE epost <> '' OR emails_found <> ''`
+  ).get() as { count: number };
+
+  const companiesWithPhone = db.prepare(
+    `SELECT COUNT(DISTINCT ${companyKey}) as count FROM companies WHERE phones_found <> ''`
+  ).get() as { count: number };
+
+  const companiesWithMail = db.prepare(
+    `SELECT COUNT(DISTINCT mapp) as count FROM mails WHERE mapp <> ''`
+  ).get() as { count: number };
+
+  const companiesWithAudit = db.prepare(
+    `SELECT COUNT(DISTINCT mapp) as count FROM audits WHERE mapp <> ''`
+  ).get() as { count: number };
+
+  const companiesWithPreview = db.prepare(`
+    SELECT COUNT(DISTINCT key) as count FROM (
+      SELECT ${companyKey} as key FROM companies WHERE preview_url <> ''
+      UNION
+      SELECT mapp as key FROM mails WHERE site_preview_url <> ''
+      UNION
+      SELECT mapp as key FROM evaluations WHERE preview_url <> ''
+    ) WHERE key IS NOT NULL AND key <> ''
+  `).get() as { count: number };
+
+  const companiesWorthySite = db.prepare(
+    `SELECT COUNT(DISTINCT ${companyKey}) as count FROM companies WHERE lower(ska_fa_sajt) = 'ja'`
+  ).get() as { count: number };
+
+  const segmentsRows = db.prepare(
+    `SELECT segment as key, COUNT(DISTINCT ${companyKey}) as count FROM companies GROUP BY segment`
+  ).all() as { key: string | null; count: number }[];
+
+  const lansRows = db.prepare(
+    `SELECT lan as key, COUNT(DISTINCT ${companyKey}) as count FROM companies GROUP BY lan`
+  ).all() as { key: string | null; count: number }[];
+
+  const statusRows = db.prepare(
+    `SELECT COALESCE(domain_status,'unknown') as key, COUNT(DISTINCT ${companyKey}) as count FROM companies GROUP BY domain_status`
+  ).all() as { key: string; count: number }[];
+
+  db.close();
+
+  const segments: Record<string, number> = {};
+  segmentsRows.forEach((row) => {
+    const key = row.key || "Okänt";
+    segments[key] = row.count;
+  });
+
+  const lans: Record<string, number> = {};
+  lansRows.forEach((row) => {
+    const key = row.key || "Okänt";
+    lans[key] = row.count;
+  });
+
+  const domainStatuses: Record<string, number> = {};
+  statusRows.forEach((row) => {
+    const key = row.key || "unknown";
+    domainStatuses[key] = row.count;
+  });
+
+  return {
+    totalCompanies: totalCompanies.count || 0,
+    totalPeople: totalPeople.count || 0,
+    totalMails: totalMails.count || 0,
+    totalAudits: totalAudits.count || 0,
+    companiesWithDomain: companiesWithDomain.count || 0,
+    companiesWithEmail: companiesWithEmail.count || 0,
+    companiesWithPhone: companiesWithPhone.count || 0,
+    companiesWithMail: companiesWithMail.count || 0,
+    companiesWithAudit: companiesWithAudit.count || 0,
+    companiesWithPreview: companiesWithPreview.count || 0,
+    companiesWorthySite: companiesWorthySite.count || 0,
+    totalDates,
+    segments,
+    lans,
+    domainStatuses,
+  };
+}
+
+async function ensureIndexForDates(dateDirs: string[]) {
+  const indexed = getIndexedDates();
+  for (const dateDir of dateDirs) {
+    const date = dateDir.split(/[\\/]/).pop() || "";
+    if (!indexed.has(date)) {
+      const { data } = await readDateData(dateDir);
+      indexDateData(date, data);
+    }
   }
 }

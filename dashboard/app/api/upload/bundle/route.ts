@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import { mkdir, writeFile } from "fs/promises";
 import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, pathExists } from "@/lib/data-paths";
+import { readDateData } from "@/lib/data-reader";
+import { indexDateData } from "@/lib/index-db";
 
 // Use UPLOAD_SECRET env var for API key authentication
 // This should be set in Render dashboard environment variables
@@ -91,7 +93,7 @@ export async function POST(request: NextRequest) {
     await writeFile(zipPath, buffer);
     console.log(`[UPLOAD] Saved ZIP file: ${zipPath}`);
 
-    // Extract the ZIP file using Node.js built-in (or external tool)
+    // Extract the ZIP file
     const extractResult = await extractZipFile(zipPath, targetDir);
 
     if (!extractResult.success) {
@@ -99,6 +101,15 @@ export async function POST(request: NextRequest) {
         { error: `Failed to extract ZIP: ${extractResult.error}` },
         { status: 500 }
       );
+    }
+
+    // Build/update SQLite index for fast search/totals
+    try {
+      const { data } = await readDateData(targetDir);
+      indexDateData(dateStr, data);
+      console.log(`[UPLOAD] Indexed data for ${dateStr}`);
+    } catch (err) {
+      console.error("[UPLOAD] Failed to index data:", err);
     }
 
     return NextResponse.json({
