@@ -1,9 +1,8 @@
 import { join } from "path";
 import { access, readdir } from "fs/promises";
 
-// On Render: persistent disk at /var/data
-// Locally: data_input folder in project root
-export const PERSISTENT_DISK_DIR = "/var/data";
+// Data directory: Use DATA_DIR env var, or default to /var/data (Render) / data_input (local)
+export const PERSISTENT_DISK_DIR = process.env.DATA_DIR || "/var/data";
 export const LOCAL_DATA_DIR = join(process.cwd(), "..", "data_input");
 export const BUNDLES_DIR = join(process.cwd(), "..", "data_bundles");
 
