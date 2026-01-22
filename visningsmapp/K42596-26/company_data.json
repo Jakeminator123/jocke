@@ -1,0 +1,95 @@
+{
+  "folder": "K42596-26",
+  "extracted_at": "2026-01-21T20:18:58.255478",
+  "company_name": "Arvand AB",
+  "orgnr": "559568-1569",
+  "verksamhet": "Konsultverksamhet inom förmedling av utbildning, redovisning, finans samt mjukvaruutveckling",
+  "sate": "Växjö",
+  "address": "Bergövägen 10, 352 44 VÄXJÖ,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-11",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Anders Georg Stefan Fransson",
+      "role": "Styrelseledamot",
+      "personnr": "197901-XXXX"
+    },
+    {
+      "name": "Sara Iranshahi",
+      "role": "Styrelsesuppleant",
+      "personnr": "198305-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "arvand.se",
+    "confidence": 1.0,
+    "source": "ai_crawled",
+    "status": "wrong_company",
+    "alternatives": [
+      {
+        "domain": "arvand.com",
+        "source": "generated"
+      },
+      {
+        "domain": "arvand.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "arvandab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Arvand AB",
+    "searches": [
+      {
+        "query": "Arvand AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Arvand AB Konsultverksamhet inom förmedling av utbildning, r kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Arvand AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "arvand.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "arvand.se",
+        "url": "https://arvand.se/",
+        "status": "wrong_company",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 1.0,
+        "title": "arvand.se är till salu",
+        "description": "",
+        "text_sample": "arvand.se är till salu Domänen arvand.se är till salu! En kort och lätt att komma ihåg domän för ditt nästa projekt. Pris: 5 000 kr Kontakta oss via e-post: [Aktivera JavaScript för att se adressen]",
+        "ai_verified": false,
+        "ai_confidence": 0,
+        "ai_reason": "AI verification failed: Error code: 429 - {'error': {'message': 'You excee"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:58:24.665239"
+  }
+}

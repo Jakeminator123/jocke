@@ -1,0 +1,93 @@
+{
+  "folder": "K42450-26",
+  "extracted_at": "2026-01-21T20:18:58.225936",
+  "company_name": "Lilla Fröets utbildning AB",
+  "orgnr": "559567-9829",
+  "verksamhet": "Företaget ska bedriva förskoleverksamhet samt därmed förenlig eller närliggande verksamhet.",
+  "sate": "Uppsala",
+  "address": "Lövängsvägen 24, 756 55 UPPSALA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-10",
+  "emails": [
+    "caroline.eek@live.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Caroline Johanna Lovisa Eek",
+      "role": "Styrelsesuppleant",
+      "personnr": "198505-XXXX"
+    },
+    {
+      "name": "Johan Oscar Eek",
+      "role": "Styrelsesuppleant",
+      "personnr": "198410-XXXX"
+    },
+    {
+      "name": "Robert Per Gustav Eek",
+      "role": "Styrelsesuppleant",
+      "personnr": "198108-XXXX"
+    },
+    {
+      "name": "Lena Elisabeth Lindgren",
+      "role": "Styrelsesuppleant",
+      "personnr": "196005-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "lillafroetsutbildning.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "lillafroetsutbildning.com",
+        "source": "generated"
+      },
+      {
+        "domain": "lillafroetsutbildning.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Lilla Fröets utbildning AB",
+    "searches": [
+      {
+        "query": "Lilla Fröets utbildning AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Lilla Fröets utbildning AB Företaget ska bedriva förskoleverksamhet samt därm kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Lilla Fröets utbildning AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "lillafroetsutbildning.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "lillafroetsutbildning.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:29:18.435758"
+  }
+}

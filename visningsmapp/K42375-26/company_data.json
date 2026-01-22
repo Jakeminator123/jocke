@@ -1,0 +1,115 @@
+{
+  "folder": "K42375-26",
+  "extracted_at": "2026-01-21T20:18:58.196924",
+  "company_name": "MLSN AB",
+  "orgnr": "559567-9324",
+  "verksamhet": "Aktiebolaget ska äga och förvalta aktier och andelar i andra bolag och driva därmed förenlig verksamhet.",
+  "sate": "Höganäs",
+  "address": "Lokegatan 3, 263 37 HÖGANÄS,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-11-28",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Shane Rama Åke Andersson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198810-XXXX"
+    },
+    {
+      "name": "Ralph Raju Magnus Andersson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198403-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "mlsn.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "mlsn.com",
+        "source": "generated"
+      },
+      {
+        "domain": "mlsn.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "mlsnab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "MLSN AB",
+    "searches": [
+      {
+        "query": "MLSN AB hemsida website",
+        "summary": "Jag hittade ingen webbplats som verkar vara den officiella hemsidan för företaget \"MLSN AB\" (organisationsnummer 559567‑9324) med säte i Höganäs. Företaget är registrerat hos Bolagsverket och syns i företagsregister som till exempel Bolagsfakta, men ingen webbplats anges där ([bolagsfakta.se](https://www.bolagsfakta.se/5595679324-MLSN_AB?utm_source=openai)).\n\nKort sagt: MLSN AB verkar inte ha någon offentlig hemsida som jag kunde hitta via sökmotorer eller företagsregister.",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679324-MLSN_AB?utm_source=openai",
+            "title": "MLSN AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "MLSN AB Aktiebolaget ska äga och förvalta aktier och andel kontakt",
+        "summary": "”MLSN AB – Aktiebolaget ska äga och förvalta aktier och andelar” betyder helt enkelt att:\n\n- Bolaget har till syfte att *inneha* (äga) aktier och andelar i andra företag.\n- Bolaget ska även *förvalta* dessa innehav, dvs. sköta dem, fatta beslut kring dem och hantera de ekonomiska aspekterna. Detta kan innefatta exempelvis att utöva rösträtt eller fatta strategiska beslut rörande ägarinnehaven.\n\nI svensk bolagsrätt är det vanligt med företag vars enda affärsidé är att fungera som ett holdingbolag",
+        "sources": [
+          {
+            "url": "https://www.standardbolag.se/information/ordlista-bolagsratt/?utm_source=openai",
+            "title": "Ordlista bolagsrätt - Svenska Standardbolag AB"
+          }
+        ]
+      },
+      {
+        "query": "\"MLSN AB\" site:se",
+        "summary": "Här är kort information om företaget **MLSN AB**, enligt svenska källor:\n\n• Organisationsnummer: 559567‑9324. Registrerat som aktivt aktiebolag med säte i Höganäs, Skåne län. Adress: Lokegatan 3, 263 37 Höganäs. Bolaget bildades den 28 november 2025 och registrerades den 19 januari 2026. Verksamheten anges vara att äga och förvalta aktier och andelar i andra bolag samt bedriva därmed förenlig verksamhet ([bolagsfakta.se](https://www.bolagsfakta.se/5595679324-MLSN_AB?utm_source=openai)).\n\n• Styre",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679324-MLSN_AB?utm_source=openai",
+            "title": "MLSN AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "standardbolag.se",
+        "confidence": 0.5
+      },
+      {
+        "domain": "mlsn.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "standardbolag.se",
+        "url": "https://www.standardbolag.se/",
+        "status": "no_match",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 0.0,
+        "title": "Ledande inom bolagsfrågor och lagerbolag sedan 1954",
+        "description": "Starta bolag - Driva & utveckla företag - Avveckla aktiebolag |\nSvenska Standardbolag AB tillhandahåller bolagstjänster i företagandets alla faser.",
+        "text_sample": "Ledande inom bolagsfrågor och lagerbolag sedan 1954 Hoppa till huvudinnehållet Hoppa till sidfoten Svenska Standardbolag AB Meny Utöka sökning STARTA bolag DRIVA företag AVVECKLA aktiebolag STARTA DRIVA AVVECKLA Vi är experter inom bolagsrätt sedan 1954 Få snabb, trygg och proffsig hjälp med din bolagsfråga Hitta rätt direkt - Fråga vår AI Starta bolag Köp ett färdigt aktiebolag och kom igång direkt Med lagerbolag får du organisationsnummer och bolagshandlingar inom två timmar. Du slipper vänta "
+      },
+      {
+        "domain": "mlsn.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:22:56.849949"
+  }
+}

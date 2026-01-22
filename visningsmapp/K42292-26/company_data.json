@@ -1,0 +1,103 @@
+{
+  "folder": "K42292-26",
+  "extracted_at": "2026-01-21T20:18:58.186734",
+  "company_name": "FinEst Invest Göteborg AB",
+  "orgnr": "559567-9696",
+  "verksamhet": "Holdingverksamhet i icke-finansiella koncerner. Bolaget ska äga och förvalta värdepapper och fastigheter samt därmed förenlig verksamhet. Bolaget ska även bedriva konsultverksamhet inom administration, ekonomi och företagsutveckling.",
+  "sate": "Göteborg",
+  "address": "c/o Ester Svärd, Aspgatan 6, 426 77 VÄSTRA FRÖLUNDA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-19",
+  "emails": [
+    "ester.svardh@telia.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Ester Maria Svärd",
+      "role": "Styrelsesuppleant",
+      "personnr": "200409-XXXX"
+    },
+    {
+      "name": "Kent Åke Rosengren",
+      "role": "Styrelsesuppleant",
+      "personnr": "196107-XXXX"
+    },
+    {
+      "name": "Åsa Maria Svärd",
+      "role": "Styrelsesuppleant",
+      "personnr": "197007-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "finestinvestgoteborg.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "finestinvestgoteborg.com",
+        "source": "generated"
+      },
+      {
+        "domain": "finestinvestgoteborg.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "FinEst Invest Göteborg AB",
+    "searches": [
+      {
+        "query": "FinEst Invest Göteborg AB hemsida website",
+        "summary": "Jag kunde inte hitta någon officiell hemsida eller webbplats för **FinEst Invest Göteborg AB**. Enligt företagsregistret har bolaget dessutom inga kontaktuppgifter såsom telefonnummer eller e-post, och uppgifter om omsättning och bokslut saknas ([bolagsfakta.se](https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai)).",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai",
+            "title": "FinEst Invest Göteborg AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "FinEst Invest Göteborg AB Holdingverksamhet i icke-finansiella koncerner. Bo kontakt",
+        "summary": "Här är kontaktuppgifter samt kort information om FinEst Invest Göteborg AB:\n\n• Organisationsnummer: 559567‑9696 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai))  \n• Adress: c/o Ester Svärd, Aspgatan 6, 426 77 Västra Frölunda (Göteborgs kommun) ([bolagsfakta.se](https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai))  \n\nBolaget bedriver \"Holdingverksamhet i icke‑finansiella koncerner.\" Det innebär att verksamheten om",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai",
+            "title": "FinEst Invest Göteborg AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "\"FinEst Invest Göteborg AB\" site:se",
+        "summary": "Här är kort och tydlig information om *FinEst Invest Göteborg AB*, främst från svenska källor:\n\n- Företaget FinEst Invest Göteborg AB har organisationsnummer **559567‑9696** och har sitt säte i Göteborg (Västra Frölunda), med adress c/o Ester Svärd, Aspgatan 6, 426 77 Västra Frölunda. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai))  \n- Bolaget registrerades nyligen – det bildades genom konstituerande stämma den 19 december 2025 och registrera",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679696-FinEst_Invest_Goteborg_AB?utm_source=openai",
+            "title": "FinEst Invest Göteborg AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "finestinvestgoteborg.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "finestinvestgoteborg.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:21:16.799784"
+  }
+}

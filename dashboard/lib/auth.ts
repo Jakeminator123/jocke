@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
 
+const DASHBOARD_PASSWORD = process.env.DASHBOARD_PASSWORD || "Ma!!orca123";
+
 export async function verifyPassword(password: string): Promise<boolean> {
-  // Simple password check - in production use proper hashing
-  return password === "pang2024";
+  return password === DASHBOARD_PASSWORD;
 }
 
 export async function isAuthenticated(): Promise<boolean> {

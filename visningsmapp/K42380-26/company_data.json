@@ -1,0 +1,115 @@
+{
+  "folder": "K42380-26",
+  "extracted_at": "2026-01-21T20:18:58.200248",
+  "company_name": "E&A Miqa AB",
+  "orgnr": "559567-9563",
+  "verksamhet": "Bolaget ska bedriva försäljning av accessoarer, både via e- handel och genom samarbeten med fysiska butiker. Verksamheten omfattar även design, utveckling, marknadsföring och import av accessoarer samt därmed förenlig verksamhet.",
+  "sate": "Botkyrka",
+  "address": "c/o Ella Hansson, Vaktrundan 14, 146 37 TULLINGE,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2026-01-01",
+  "emails": [
+    "miqa.jewelry@outlook.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Ella Elin Hansson",
+      "role": "Styrelsesuppleant",
+      "personnr": "200601-XXXX"
+    },
+    {
+      "name": "Anna Elin Hansson",
+      "role": "Styrelsesuppleant",
+      "personnr": "197904-XXXX"
+    },
+    {
+      "name": "Karl Magnus Hansson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198006-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "eamiqa.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "eamiqa.com",
+        "source": "generated"
+      },
+      {
+        "domain": "eamiqa.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "eamiqaab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "E&A Miqa AB",
+    "searches": [
+      {
+        "query": "E&A Miqa AB hemsida website",
+        "summary": "Jag kunde tyvärr inte hitta någon officiell hemsida för \"E&A Miqa AB\" eller \"E&A Miqa Handelsbolag\". Följande information går att fastställa via offentliga företagsregister:\n\n- E&A Miqa AB har organisationsnummer 559567‑9563 och är registrerat på Vaktrundan 14, 146 37 Tullinge, Botkyrka kommun. VD och styrelseordförande är Ella Hansson ([bolagsfakta.se](https://www.bolagsfakta.se/5595679563-E%26A_Miqa_AB?utm_source=openai)).\n- E&A Miqa Handelsbolag, organisationsnummer 969799‑9739, har samma adr",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679563-E%26A_Miqa_AB?utm_source=openai",
+            "title": "E&A Miqa AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          },
+          {
+            "url": "https://www.ratsit.se/9697999739-E%26A_Miqa_Handelsbolag?utm_source=openai",
+            "title": "E&A Miqa Handelsbolag i Tullinge | Köp bolagsdata"
+          }
+        ]
+      },
+      {
+        "query": "E&A Miqa AB Bolaget ska bedriva försäljning av accessoarer, bå kontakt",
+        "summary": "Här är en kortfattad beskrivning av **E&A Miqa AB**, inklusive verksamhet och kontaktuppgifter:\n\n- E&A Miqa AB är ett **nyregistrerat aktiebolag** med organisationsnummer **559567‑9563**, registrerat och aktivt sedan den **19 januari 2026**. Bolaget har ett aktiekapital på **25 000 SEK** och har sitt säte i **Botkyrka kommun**, med postadress **c/o Ella Hansson, Vaktrundan 14, 146 37 Tullinge**. ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679563/eocha-miqa-ab?utm_source",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679563/eocha-miqa-ab?utm_source=openai",
+            "title": "E&A Miqa AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          },
+          {
+            "url": "https://www.bolagsfakta.se/5595679563-E%26A_Miqa_AB?utm_source=openai",
+            "title": "E&A Miqa AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"E&A Miqa AB\" site:se",
+        "summary": "Här är kort information om **E&A Miqa AB**, enligt vad som framgår från svenska källor:\n\n- **Organisationsnummer:** 559567‑9563 ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679563/eocha-miqa-ab?utm_source=openai))  \n- **Registreringsdatum:** 19 januari 2026 – bolaget har varit aktivt sedan detta datum ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679563/eocha-miqa-ab?utm_source=openai))  \n- **Bolagsform:** Aktiebolag, med säte i Botkyrka kommun (T",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679563/eocha-miqa-ab?utm_source=openai",
+            "title": "E&A Miqa AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "eamiqa.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "eamiqa.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:23:24.342152"
+  }
+}

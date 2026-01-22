@@ -1,0 +1,110 @@
+{
+  "folder": "K41924-26",
+  "extracted_at": "2026-01-21T20:18:58.173392",
+  "company_name": "Blimer AB",
+  "orgnr": "559567-9548",
+  "verksamhet": "Företaget utvecklar och säljer utbildningar samt erbjuder konsulttjänster inom utbildning och affärsutveckling.",
+  "sate": "Sundbyberg",
+  "address": "Mönstringsgatan 15, 174 66 SUNDBYBERG,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-03",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Tanja Zandi",
+      "role": "Styrelsesuppleant",
+      "personnr": "199609-XXXX"
+    },
+    {
+      "name": "Ronak Zandi",
+      "role": "Styrelsesuppleant",
+      "personnr": "197012-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "blimer.se",
+    "confidence": 1.0,
+    "source": "ai_crawled",
+    "status": "wrong_company",
+    "alternatives": [
+      {
+        "domain": "blimer.com",
+        "source": "generated"
+      },
+      {
+        "domain": "blimer.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "blimerab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Blimer AB",
+    "searches": [
+      {
+        "query": "Blimer AB hemsida website",
+        "summary": "Jag kunde inte hitta någon officiell hemsida för \"Blimer AB\". Företaget verkar vara nyregistrerat (bildat den 3 december 2025 och registrerat den 19 januari 2026) och har ännu ingen officiell webbplats som är lätt att hitta via webbsökning ([bolagsfakta.se](https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai)).\n\nFör företagsinformation hänvisas till tredjepartsdatabaser såsom Bolagsfakta eller Kreditrapporten, där du kan se grundläggande detaljer: adress (Mönstringsgatan 15, 174 66",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai",
+            "title": "Blimer AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Blimer AB Företaget utvecklar och säljer utbildningar samt e kontakt",
+        "summary": "Här är en kortfattad beskrivning av **Blimer AB**, med källhänvisningar:\n\n- Blimer AB är ett nyligen registrerat svenskt aktiebolag (bolagsform: Aktiebolag) med organisationsnummer **559567‑9548**. Bolaget verkar ha registrerats den **19 januari 2026** och har sitt säte i **Sundbyberg, Stockholms län**, på adressen Mönstringsgatan 15. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai))\n\n- Företaget **utvecklar och säljer utbildningar** samt **erbjuder konsulttjä",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai",
+            "title": "Blimer AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Blimer AB\" site:se",
+        "summary": "Här är en kort sammanfattning av **Blimer AB** baserat på svenska källor:\n\n- **Företagsinformation**  \n  Blimer AB är ett aktivt aktiebolag med organisationsnummer **559567‑9548** och har sitt säte i Sundbyberg. Bolaget bildades den 3 december 2025 och registrerades den 19 januari 2026. Adressen är Mönstringsgatan 15, 174 66 Sundbyberg. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai))\n\n- **Verksamhet**  \n  Bolaget utvecklar och säljer utbildningar samt erbjud",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679548-Blimer_AB?utm_source=openai",
+            "title": "Blimer AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "blimer.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "blimer.se",
+        "url": "https://blimer.se/",
+        "status": "wrong_company",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 1.0,
+        "title": "blimer.se är till salu",
+        "description": "",
+        "text_sample": "blimer.se är till salu Domänen blimer.se är till salu! En kort och lätt att komma ihåg domän för ditt nästa projekt. Pris: 5 000 kr Kontakta oss via e-post: [Aktivera JavaScript för att se adressen]",
+        "ai_verified": false,
+        "ai_confidence": 1.0,
+        "ai_reason": "Hemsidan blimer.se är till salu och innehåller ingen information som kopplar den till företaget Blimer AB i Sundbyberg. Det finns inga tecken på att hemsidan tillhör företaget med det angivna organisationsnumret och verksamhetsbeskrivningen."
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:19:19.100264"
+  }
+}

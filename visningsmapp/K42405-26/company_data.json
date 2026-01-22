@@ -1,0 +1,116 @@
+{
+  "folder": "K42405-26",
+  "extracted_at": "2026-01-21T20:18:58.212459",
+  "company_name": "Quattro Rex AB",
+  "orgnr": "559567-9670",
+  "verksamhet": "Föremålet för bolagets verksamhet är att äga rättigheter till, samt marknadsföra märken och produkter samt därmed förenlig verksamhet.",
+  "sate": "Göteborg",
+  "address": "Finnholm, Rydkärrsvägen 12, 443 71 GRÅBO,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-19",
+  "emails": [
+    "rickard_finnholm@live.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Rickard Lennart Finnholm",
+      "role": "Styrelsesuppleant",
+      "personnr": "198806-XXXX"
+    },
+    {
+      "name": "Aléxandros Leo Brogiannis",
+      "role": "Styrelsesuppleant",
+      "personnr": "198702-XXXX"
+    },
+    {
+      "name": "Simon Calloway Fredin",
+      "role": "Styrelsesuppleant",
+      "personnr": "198909-XXXX"
+    },
+    {
+      "name": "Peder Christopher Wallgren",
+      "role": "Styrelsesuppleant",
+      "personnr": "198901-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "quattrorex.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "quattrorex.com",
+        "source": "generated"
+      },
+      {
+        "domain": "quattrorex.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "quattrorexab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Quattro Rex AB",
+    "searches": [
+      {
+        "query": "Quattro Rex AB hemsida website",
+        "summary": "Här är en kortfattad information om Quattro Rex AB:\n\nQuattro Rex AB är ett svenskt aktiebolag med organisationsnummer 559567‑9670, registrerat och aktivt sedan den 19 januari 2026 ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai)). Företaget har sitt säte i Göteborgs kommun och postadressen är Finnholm, Rydkärrsvägen 12, 443 71 Gråbo ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai",
+            "title": "Quattro Rex AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          }
+        ]
+      },
+      {
+        "query": "Quattro Rex AB Föremålet för bolagets verksamhet är att äga rätti kontakt",
+        "summary": "Quattro Rex AB är ett nyregistrerat aktiebolag (organisationsnummer 559567‑9670), aktivt sedan den 19 januari 2026 och med säte i Göteborgs kommun (postadress i Gråbo) ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai)).\n\nVerksamhetsbeskrivningen enligt Bolagsverket lyder:\n”Föremålet för bolagets verksamhet är att äga rättigheter till, samt marknadsföra märken och produkter samt därmed förenlig verksamhet.” ([kreditrapporten.se](https:/",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai",
+            "title": "Quattro Rex AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          }
+        ]
+      },
+      {
+        "query": "\"Quattro Rex AB\" site:se",
+        "summary": "Här är kort information om Quattro Rex AB (enligt svenska källor):\n\n• Quattro Rex AB är ett svenskt aktiebolag med organisationsnummer 559567‑9670. Bolaget är aktivt och registrerades den 19 januari 2026, med säte i Göteborgs kommun. Registreringen visar även att bolaget bildades i december 2025, med en postadress i Gråbo. Aktiekapitalet är 25 000 SEK. ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai))\n\n• Bolagets verksamhetsbeskrivnin",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679670/quattro-rex-ab?utm_source=openai",
+            "title": "Quattro Rex AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          },
+          {
+            "url": "https://www.bolagsfakta.se/5595679670-Quattro_Rex_AB?utm_source=openai",
+            "title": "Quattro Rex AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "quattrorex.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "quattrorex.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:25:14.514827"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "folder": "K42557-26",
+  "extracted_at": "2026-01-21T20:18:58.245611",
+  "company_name": "M. Ericssons Åkeri AB",
+  "orgnr": "559568-0504",
+  "verksamhet": "Bolaget skall bedriva åkeri verksamhet och därmed förenlig verksamhet.",
+  "sate": "Bengtsfors",
+  "address": "Franserudsvägen 33, 666 32 BENGTSFORS,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-29",
+  "emails": [
+    "m.ericssonsakeri@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Claes Magnus Eriksson",
+      "role": "Styrelsesuppleant",
+      "personnr": "197405-XXXX"
+    },
+    {
+      "name": "Kent Åke Urban Karlsson",
+      "role": "Styrelsesuppleant",
+      "personnr": "197209-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "mericssonsakeri.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "mericssonsakeri.com",
+        "source": "generated"
+      },
+      {
+        "domain": "mericssonsakeri.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "mericssonsakeriab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "M. Ericssons Åkeri AB",
+    "searches": [
+      {
+        "query": "M. Ericssons Åkeri AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "M. Ericssons Åkeri AB Bolaget skall bedriva åkeri verksamhet och därmed  kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"M. Ericssons Åkeri AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "mericssonsakeri.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "mericssonsakeri.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:49:28.773649"
+  }
+}

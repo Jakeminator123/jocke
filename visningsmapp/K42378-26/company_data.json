@@ -1,0 +1,102 @@
+{
+  "folder": "K42378-26",
+  "extracted_at": "2026-01-21T20:18:58.198585",
+  "company_name": "Wikell Invest AB",
+  "orgnr": "559567-9357",
+  "verksamhet": "Aktiebolaget ska endast äga aktier i andra bolag och kommer inte ha någon aktiv verksamhet. De aktier som bolaget kommer äga är inom distribution av kosmetika.",
+  "sate": "Nyköping",
+  "address": "Stockholmsvägen 31, 611 37 NYKÖPING,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-22",
+  "emails": [
+    "emma.bergqvist1980@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Emma Ingrid Birgitta Bergqvist",
+      "role": "Styrelsesuppleant",
+      "personnr": "198005-XXXX"
+    },
+    {
+      "name": "Wilma Elin Anna Modén",
+      "role": "Styrelsesuppleant",
+      "personnr": "200512-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "wikellinvest.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "wikellinvest.com",
+        "source": "generated"
+      },
+      {
+        "domain": "wikellinvest.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "wikellinvestab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Wikell Invest AB",
+    "searches": [
+      {
+        "query": "Wikell Invest AB hemsida website",
+        "summary": "Jag kunde tyvärr inte hitta någon officiell hemsida för \"Wikell Invest AB\". Följande information finns dock tillgänglig:\n\n- Enligt Bolagsfakta finns företagets adress på Stockholmsvägen 31, 611 37 Nyköping, med organisationsnummer 559567‑9357, och bolaget är registrerat som ett aktiebolag sedan 2025‑12‑22 samt registrerat hos Bolagsverket den 2026‑01‑19 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai)).  \n- Det finns ingen länk till någon webbplats elle",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai",
+            "title": "Wikell Invest AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Wikell Invest AB Aktiebolaget ska endast äga aktier i andra bolag o kontakt",
+        "summary": "Wikell Invest AB, organisationsnummer 559567‑9357, har enligt registrerade uppgifter från företagsdatabasen Bolagsfakta sin verksamhet angiven som följande: \"Aktiebolaget ska endast äga aktier i andra bolag och kommer inte ha någon aktiv verksamhet.\" Bolaget planerar att äga aktier inom distribution av kosmetika. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai))\n\nKontaktuppgifter:  \nAdress: Stockholmsvägen 31, 611 37 Nyköping. ([bolagsfakta.se](https://",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai",
+            "title": "Wikell Invest AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Wikell Invest AB\" site:se",
+        "summary": "Här är kort information om Wikell Invest AB från svenska källor:\n\n- Wikell Invest AB är ett aktivt aktiebolag med organisationsnummer 559567‑9357. Företaget har säte i Nyköping och adressen är Stockholmsvägen 31, 611 37 Nyköping ([bolagsfakta.se](https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai)).\n\n- Bolaget grundades den 22 december 2025 och registrerades hos Bolagsverket den 19 januari 2026. Det framgår att verksamhetsbeskrivningen anger att aktiebolaget endast ska äga ",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679357-Wikell_Invest_AB?utm_source=openai",
+            "title": "Wikell Invest AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "wikellinvest.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "wikellinvest.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:23:12.351949"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "folder": "K42371-26",
+  "extracted_at": "2026-01-21T20:18:58.193529",
+  "company_name": "Navaro Management AB",
+  "orgnr": "559568-1833",
+  "verksamhet": "Bolaget ska bedriva konsultverksamhet inom interim management, ledarskap, verksamhetsstyrning och affärsutveckling med inriktning mot fastighetsrelaterade verksamheter. Bolaget ska även arbeta med projektledning och utveckling av fastighetsprojekt samt tillhandahålla rådgivning inom organisationsutveckling, förändringsledning och strategiska utvecklingsinitiativ samt därmed förenlig verksamhet.",
+  "sate": "Sollentuna",
+  "address": "c/o Pontus Larsson, Bragevägen 10, 191 45 SOLLENTUNA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-10",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Åke Pontus Larsson",
+      "role": "Styrelseledamot",
+      "personnr": "196309-XXXX"
+    },
+    {
+      "name": "Christina Helena West Larsson",
+      "role": "Styrelsesuppleant",
+      "personnr": "196705-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "navaromanagement.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "navaromanagement.com",
+        "source": "generated"
+      },
+      {
+        "domain": "navaromanagement.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "navaromanagementab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Navaro Management AB",
+    "searches": [
+      {
+        "query": "Navaro Management AB hemsida website",
+        "summary": "Jag hittade ingen officiell webbplats (hemsida) för Navaro Management AB. Företaget är registrerat den 19 januari 2026 och är aktivt med säte i Sollentuna, med konsultverksamhet inom interim management, ledarskap, verksamhetsstyrning och affärsutveckling riktat mot fastighetsrelaterade verksamheter ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595681833/navaro-management-ab?utm_source=openai)).\n\nKortfattat:\n- Navaro Management AB har ingen känd officiell hemsida.\n- Företaget",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595681833/navaro-management-ab?utm_source=openai",
+            "title": "Navaro Management AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          }
+        ]
+      },
+      {
+        "query": "Navaro Management AB Bolaget ska bedriva konsultverksamhet inom interim kontakt",
+        "summary": "Här är en kortfattad beskrivning av Navaro Management AB och dess verksamhetsinriktning, med källhänvisningar:\n\nNavaro Management AB är ett **aktiebolag** (org.nr. 559568‑1833), med säte i **Sollentuna**. Bolaget bildades den **10 december 2025** och registrerades hos Bolagsverket den **19 januari 2026** ([bolagsfakta.se](https://www.bolagsfakta.se/5595681833-Navaro_Management_AB?utm_source=openai)). Adressen är **Bragevägen 10, 191 45 Sollentuna** ([bolagsfakta.se](https://www.bolagsfakta.se/55",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595681833-Navaro_Management_AB?utm_source=openai",
+            "title": "Navaro Management AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Navaro Management AB\" site:se",
+        "summary": "Här är en kortfattad översikt över Navaro Management AB baserat på information från svenska källor:\n\n- Organisationsnummer: 559568‑1833 ([bolagsfakta.se](https://www.bolagsfakta.se/5595681833-Navaro_Management_AB?utm_source=openai))  \n- Juridisk form: Aktiebolag, aktivt företag ([bolagsfakta.se](https://www.bolagsfakta.se/5595681833-Navaro_Management_AB?utm_source=openai))  \n- Säte: Sollentuna, Stockholms län. Adress: c/o Pontus Larsson, Bragevägen 10, 191 45 Sollentuna ([bolagsfakta.se](https:/",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595681833-Navaro_Management_AB?utm_source=openai",
+            "title": "Navaro Management AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "navaromanagement.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "navaromanagement.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:22:26.351537"
+  }
+}

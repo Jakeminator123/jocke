@@ -1,0 +1,100 @@
+{
+  "folder": "K41964-26",
+  "extracted_at": "2026-01-21T20:18:58.175357",
+  "company_name": "Isak Oscarson AB",
+  "orgnr": "559567-9852",
+  "verksamhet": "Föremålet för bolagets verksamhet är förvaltning av kapital med långsiktiga investeringar i värdepapper, fastigheter och lösöre med förväntat bevarat eller ökande värde.",
+  "sate": "Östersund",
+  "address": "c/o Advokatfirman Abersten, Hamngatan 15, 831 34 ÖSTERSUND,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-11",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Bo Isak Oscarson",
+      "role": "Styrelsesuppleant",
+      "personnr": "199007-XXXX"
+    },
+    {
+      "name": "Jenny Elisabeth Lindström",
+      "role": "Styrelsesuppleant",
+      "personnr": "198510-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "isakoscarson.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "isakoscarson.com",
+        "source": "generated"
+      },
+      {
+        "domain": "isakoscarson.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "isakoscarsonab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Isak Oscarson AB",
+    "searches": [
+      {
+        "query": "Isak Oscarson AB hemsida website",
+        "summary": "Jag hittade ingen officiell hemsida för \"Isak Oscarson AB\". Enligt företagsinformationen från Bolagsfakta finns följande uppgifter:\n\n• Företaget är registrerat med organisationsnummer 559567‑9852 och har säte i Östersund (c/o Advokatfirman Abersten, Hamngatan 15, 831 34 Östersund) ([bolagsfakta.se](https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai)).  \n• Det framgår inget angivet telefonnummer eller webbadress för företaget ([bolagsfakta.se](https://www.bolagsfakta.se/5595",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai",
+            "title": "Isak Oscarson AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Isak Oscarson AB Föremålet för bolagets verksamhet är förvaltning a kontakt",
+        "summary": "Här är en kort och tydlig formulering:\n\nIsak Oscarson AB  \nFöremålet för bolagets verksamhet är förvaltning av kapital med långsiktiga investeringar i värdepapper, fastigheter och lösöre med förväntat bevarat eller ökande värde. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai))\n\nFör mer information, kontakta gärna Bolagsverket eller företaget direkt.",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai",
+            "title": "Isak Oscarson AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Isak Oscarson AB\" site:se",
+        "summary": "Här är en kort översikt över företaget \"Isak Oscarson AB\" med uppgifter från svenska källor:\n\n• Organisationsnummer: 559567‑9852 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai))  \n• Bolaget har sitt säte i Östersund, Jämtlands län, med adress c/o Advokatfirman Abersten, Hamngatan 15, 831 34 Östersund ([bolagsfakta.se](https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai))  \n• Bolaget registrerades den 19 januari 2026 (firmanamn och ",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679852-Isak_Oscarson_AB?utm_source=openai",
+            "title": "Isak Oscarson AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "isakoscarson.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "isakoscarson.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:19:40.302383"
+  }
+}

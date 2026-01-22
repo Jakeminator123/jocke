@@ -1,0 +1,87 @@
+{
+  "folder": "K42685-26",
+  "extracted_at": "2026-01-21T20:18:58.265400",
+  "company_name": "Baticha medConsult AB",
+  "orgnr": "559568-1825",
+  "verksamhet": "Företaget ska bedriva konsultverksamhet inom medicin och hälsovård.",
+  "sate": "Malmö",
+  "address": "Velandergatan 90a, 215 66 MALMÖ,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-10-12",
+  "emails": [
+    "baticha.hazem@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Hazem Baticha",
+      "role": "Styrelseledamot",
+      "personnr": "199410-XXXX"
+    },
+    {
+      "name": "Mohamed Baticha",
+      "role": "Styrelsesuppleant",
+      "personnr": "195208-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "batichamedconsult.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "batichamedconsult.com",
+        "source": "generated"
+      },
+      {
+        "domain": "batichamedconsult.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "batichamedconsultab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Baticha medConsult AB",
+    "searches": [
+      {
+        "query": "Baticha medConsult AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Baticha medConsult AB Företaget ska bedriva konsultverksamhet inom medic kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Baticha medConsult AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "batichamedconsult.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "batichamedconsult.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T21:09:38.266092"
+  }
+}

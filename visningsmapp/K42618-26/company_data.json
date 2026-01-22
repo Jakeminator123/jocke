@@ -1,0 +1,102 @@
+{
+  "folder": "K42618-26",
+  "extracted_at": "2026-01-21T20:18:58.260390",
+  "company_name": "IKE Advokat AB",
+  "orgnr": "559568-0355",
+  "verksamhet": "Advokatverksamhet.",
+  "sate": "Stockholm",
+  "address": "c/o Advokatfirman Guide, Högbergsgatan 27, 116 20 STOCKHOLM,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-17",
+  "emails": [
+    "ingrid@advguide.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Ingrid Kristina Elovsson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198211-XXXX"
+    },
+    {
+      "name": "Alexandra Lucia Maria Wenckert",
+      "role": "Styrelsesuppleant",
+      "personnr": "197312-XXXX"
+    },
+    {
+      "name": "Lars Benny Svensson",
+      "role": "Styrelsesuppleant",
+      "personnr": "197912-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "advguide.se",
+    "confidence": 1.0,
+    "source": "ai_crawled",
+    "status": "wrong_company",
+    "alternatives": [
+      {
+        "domain": "ikeadvokat.se",
+        "source": "generated"
+      },
+      {
+        "domain": "ikeadvokat.com",
+        "source": "generated"
+      },
+      {
+        "domain": "ikeadvokat.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "direct",
+  "research": {
+    "company": "IKE Advokat AB",
+    "searches": [
+      {
+        "query": "IKE Advokat AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "IKE Advokat AB Advokatverksamhet. kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"IKE Advokat AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "advguide.se",
+        "confidence": 0.85
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "advguide.se",
+        "url": "https://advguide.se/",
+        "status": "wrong_company",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 1.0,
+        "title": "Brottmål, företagsjuridik och familjerätt i Stockholm",
+        "description": "Vi har funnits sedan 1981 och vi är specialiserade på brottmål och annan humanjuridik. Oavsett om du är misstänkt eller utsatt för brott, är i en vårdnadstvist eller behöver hjälp med privaträttsliga ",
+        "text_sample": "Brottmål, företagsjuridik och familjerätt i Stockholm Eskilstuna Malmö Stockholm Uppsala Utsatt för brott? Då kan du ha rätt till ett målsägandebiträde. Ge oss förtroendet att företräda dig, för oss är varje uppdrag livsviktigt. Misstänkt för brott? På advokatfirman Guide tjänstgör några av Sveriges främsta försvarsadvokater. Låt inte slumpen avgöra vem som ska försvara dig. Juridisk rådgivning? Privat eller Företag Legal advice in your language Svenska • English Shqiptar • Español Türk Vilka vi",
+        "ai_verified": false,
+        "ai_confidence": 0,
+        "ai_reason": "AI verification failed: Error code: 429 - {'error': {'message': 'You excee"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T21:04:14.876181"
+  }
+}

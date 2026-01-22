@@ -1,0 +1,10 @@
+{
+  "folder": "K44120-26",
+  "company_name": "Aktiebolaget Grundstenen 178300",
+  "date_folder": "20260121",
+  "evaluated_at": "2026-01-21T21:14:51.812812",
+  "should_get_site": false,
+  "confidence": 0.0,
+  "reasoning": "Fel vid bedömning: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+  "error": "Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+}

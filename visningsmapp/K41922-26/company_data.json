@@ -1,0 +1,102 @@
+{
+  "folder": "K41922-26",
+  "extracted_at": "2026-01-21T20:18:58.171370",
+  "company_name": "Antore AB",
+  "orgnr": "559568-1676",
+  "verksamhet": "Bolaget ska bedriva rådgivning, samtalsstöd och konsultverksamhet inom förändring, kris och kommunikation för individer och organisationer samt bedriva författarskap, innehållsproduktion och föreläsningar samt därmed förenlig verksamhet.",
+  "sate": "Stockholm",
+  "address": "Bondegatan 1G, 116 23 STOCKHOLM,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-11",
+  "emails": [
+    "maria@frandegard.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Maria Felicitas Frändegård",
+      "role": "Styrelseledamot",
+      "personnr": "197501-XXXX"
+    },
+    {
+      "name": "Jan Erik Emil Frändegård",
+      "role": "Styrelsesuppleant",
+      "personnr": "197607-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "frandegard.se",
+    "confidence": 0.85,
+    "source": "email",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "antore.se",
+        "source": "generated"
+      },
+      {
+        "domain": "antore.com",
+        "source": "generated"
+      },
+      {
+        "domain": "antore.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "direct",
+  "research": {
+    "company": "Antore AB",
+    "searches": [
+      {
+        "query": "Antore AB hemsida website",
+        "summary": "Här är information om Antore AB:\n\n• Antore AB är ett svenskt aktiebolag med organisationsnummer 559568‑1676, registrerat hos Bolagsverket och med säte på Bondegatan 1G, 116 23 Stockholm. ([bolagsfakta.se](https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai))  \n• Bolaget registrerades den 19 januari 2026 och bildades den 11 december 2025. ([bolagsfakta.se](https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai))  \n• Verksamhetsbeskrivningen omfattar rådgivning, samtalsstö",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai",
+            "title": "Antore AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Antore AB Bolaget ska bedriva rådgivning, samtalsstöd och ko kontakt",
+        "summary": "Här är en kort information om **Antore AB**:\n\nAntore AB (organisationsnummer 559568‑1676) är ett svenskt aktiebolag med säte i Stockholm på Bondegatan 1G, 116 23 Stockholm ([bolagsfakta.se](https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai)).\n\nBolaget har registrerats den 19 januari 2026, och bildades genom konstituerande stämma den 11 december 2025 ([bolagsfakta.se](https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai)).\n\nI bolagsordningen anges att verksamheten ska",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai",
+            "title": "Antore AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Antore AB\" site:se",
+        "summary": "Här är en kortfattad sammanställning om Antore AB med källhänvisningar:\n\n- Antore AB är ett aktivt aktiebolag med organisationsnummer 559568‑1676, med säte i Stockholm på adressen Bondegatan 1 G, 116 23 Stockholm ([bolagsfakta.se](https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai)).\n\n- Företaget registrerades den 19 januari 2026 (firmanamnet och registreringen skedde samma dag), och bolagsordningen är daterad 11 december 2025 ([bolagsfakta.se](https://www.bolagsfakta.se/559568167",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595681676-Antore_AB?utm_source=openai",
+            "title": "Antore AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "frandegard.se",
+        "confidence": 0.85
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "frandegard.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:19:00.949208"
+  }
+}

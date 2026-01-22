@@ -1,0 +1,92 @@
+{
+  "folder": "K42555-26",
+  "extracted_at": "2026-01-21T20:18:58.243766",
+  "company_name": "Aesir Partners AB",
+  "orgnr": "559568-1841",
+  "verksamhet": "Bolaget ska bedriva rådgivningsverksamhet inom patenrätt och annan immaterialrätt, innovationsstrategi och affärsutveckling, särskilt för sektorerna livsvetenskap och medicinsk teknik samt bedriva därmed förenlig verksamhet.",
+  "sate": "Lund",
+  "address": "Stadsbudsgatan 11, 227 36 LUND,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2026-01-01",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Peter Joakim Holm",
+      "role": "Styrelseledamot",
+      "personnr": "197412-XXXX"
+    },
+    {
+      "name": "Karin Elisabet Kristina Axelsson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198004-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "aesirpartners.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "aesirpartners.com",
+        "source": "generated"
+      },
+      {
+        "domain": "aesirpartners.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "aesirpartnersab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Aesir Partners AB",
+    "searches": [
+      {
+        "query": "Aesir Partners AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Aesir Partners AB Bolaget ska bedriva rådgivningsverksamhet inom pat kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Aesir Partners AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "aesirpartners.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "aesirpartners.se",
+        "url": "https://aesirpartners.se/",
+        "status": "no_match",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 0.0,
+        "title": "",
+        "description": "",
+        "text_sample": ""
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:47:43.628585"
+  }
+}

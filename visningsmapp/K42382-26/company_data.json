@@ -1,0 +1,98 @@
+{
+  "folder": "K42382-26",
+  "extracted_at": "2026-01-21T20:18:58.201946",
+  "company_name": "Patrik Almlöf Va Konsult AB",
+  "orgnr": "559568-0322",
+  "verksamhet": "Bolaget skall konsulttjänster inom främst kommunalt vatten och avlopp.",
+  "sate": "Kristianstad",
+  "address": "Patrik Almlöf, Kuttervägen 22, 296 37 ÅHUS,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-10",
+  "emails": [
+    "4uikristianstad@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Karl Jonas Patrik Almlöf",
+      "role": "Styrelsesuppleant",
+      "personnr": "196502-XXXX"
+    },
+    {
+      "name": "Anna Märta Elisabet Almlöf",
+      "role": "Styrelsesuppleant",
+      "personnr": "197008-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "patrikalmlofvakonsult.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "patrikalmlofvakonsult.com",
+        "source": "generated"
+      },
+      {
+        "domain": "patrikalmlofvakonsult.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Patrik Almlöf Va Konsult AB",
+    "searches": [
+      {
+        "query": "Patrik Almlöf Va Konsult AB hemsida website",
+        "summary": "Jag hittade ingen officiell hemsida för Patrik Almlöf Va Konsult AB. Enligt företagsregister som Bolagsfakta finns ingen webbplats angiven för bolaget ([bolagsfakta.se](https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai)).\n\nKort svar: det verkar inte finnas någon offentlig hemsida för Patrik Almlöf Va Konsult AB i dagsläget.",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai",
+            "title": "Patrik Almlöf Va Konsult AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "Patrik Almlöf Va Konsult AB Bolaget skall konsulttjänster inom främst kommunal kontakt",
+        "summary": "Här är en kort sammanfattning av bolaget **Patrik Almlöf Va Konsult AB**, baserad på officiell information:\n\n- Organisationsnummer: **559568‑0322** ([bolagsfakta.se](https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai))  \n- Säte: **Kristianstad, Skåne län**; adress: *Kuttervägen 22, 296 37 Åhus* ([bolagsfakta.se](https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai))  \n- Verksamhet: Bolaget ska bedriva konsulttjänster inom främst **k",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai",
+            "title": "Patrik Almlöf Va Konsult AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "\"Patrik Almlöf Va Konsult AB\" site:se",
+        "summary": "Här är kort information om Patrik Almlöf Va Konsult AB enligt svenska källor:\n\n- Organisationsnummer: 559568‑0322 ([bolagsfakta.se](https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai))  \n- Juridisk form: Aktiebolag, aktivt bolag ([bolagsfakta.se](https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai))  \n- Registrerat som bolag: bildat den 10 december 2025, registrerat hos Bolagsverket den 19 januari 2026 ([bolagsfakta.se](https://www",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595680322-Patrik_Almlof_Va_Konsult_AB?utm_source=openai",
+            "title": "Patrik Almlöf Va Konsult AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "patrikalmlofvakonsult.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "patrikalmlofvakonsult.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:23:41.253739"
+  }
+}

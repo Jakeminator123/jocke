@@ -1,0 +1,89 @@
+{
+  "folder": "K42446-26",
+  "extracted_at": "2026-01-21T20:18:58.224235",
+  "company_name": "Solvarinna AB",
+  "orgnr": "559568-0199",
+  "verksamhet": "Företaget ska bedriva tjänster som miljökonsult. Rådgivning inom miljökonsekvensbeskrivningar, natur- och vattenreglering åt företag. Verksamheter bedrivs från eget kontor.",
+  "sate": "Härryda",
+  "address": "Bergstigen 8, 438 94 HÄRRYDA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-11-01",
+  "emails": [
+    "evelyn@solvarinna.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Nick Roskam",
+      "role": "Styrelsesuppleant",
+      "personnr": "198805-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "solvarinna.com",
+    "confidence": 0.85,
+    "source": "email",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "solvarinna.se",
+        "source": "generated"
+      },
+      {
+        "domain": "solvarinna.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "solvarinnaab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "direct",
+  "research": {
+    "company": "Solvarinna AB",
+    "searches": [
+      {
+        "query": "Solvarinna AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Solvarinna AB Företaget ska bedriva tjänster som miljökonsult. R kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Solvarinna AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "solvarinna.com",
+        "confidence": 0.85
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "solvarinna.com",
+        "url": "https://solvarinna.com/",
+        "status": "no_match",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 0.0,
+        "title": "Komt binnenkort",
+        "description": "",
+        "text_sample": "Komt binnenkort Komt binnenkort Nieuwe WordPress site wordt gebouwd en zal binnenkort worden gepubliceerd"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:27:30.861616"
+  }
+}

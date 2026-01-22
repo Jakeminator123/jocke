@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
-import { mkdir, writeFile, rm } from "fs/promises";
-import { existsSync, createWriteStream } from "fs";
-import { Readable } from "stream";
-import { pipeline } from "stream/promises";
-import { createGunzip } from "zlib";
+import { mkdir, writeFile } from "fs/promises";
 import { PERSISTENT_DISK_DIR, LOCAL_DATA_DIR, pathExists } from "@/lib/data-paths";
 
 // Use UPLOAD_SECRET env var for API key authentication
@@ -141,7 +137,7 @@ async function extractZipFile(
       const entries = zip.getEntries();
       console.log(`[UPLOAD] Extracted ${entries.length} files using AdmZip`);
       return { success: true, filesExtracted: entries.length };
-    } catch (admZipError) {
+    } catch {
       console.log("[UPLOAD] AdmZip not available, trying alternative...");
     }
 

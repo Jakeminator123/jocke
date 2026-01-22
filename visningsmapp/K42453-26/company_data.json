@@ -1,0 +1,87 @@
+{
+  "folder": "K42453-26",
+  "extracted_at": "2026-01-21T20:18:58.227535",
+  "company_name": "Cejiko AB",
+  "orgnr": "559567-9886",
+  "verksamhet": "Äga och förvalta aktier i rörelsedrivande bolag.",
+  "sate": "Sundsvall",
+  "address": "c/o Johan Karlstedt, Högalidsgatan 22, 856 31 SUNDSVALL,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-16",
+  "emails": [
+    "j_karlstedt@hotmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Charles Johan Karlstedt",
+      "role": "Styrelsesuppleant",
+      "personnr": "199308-XXXX"
+    },
+    {
+      "name": "Jan Peder Karlstedt",
+      "role": "Styrelsesuppleant",
+      "personnr": "196407-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "cejiko.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "cejiko.com",
+        "source": "generated"
+      },
+      {
+        "domain": "cejiko.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "cejikoab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Cejiko AB",
+    "searches": [
+      {
+        "query": "Cejiko AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Cejiko AB Äga och förvalta aktier i rörelsedrivande bolag. kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Cejiko AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "cejiko.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "cejiko.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:31:09.085782"
+  }
+}

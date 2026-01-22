@@ -1,0 +1,97 @@
+{
+  "folder": "K42434-26",
+  "extracted_at": "2026-01-21T20:18:58.222575",
+  "company_name": "Johan Kalla AB",
+  "orgnr": "559567-9795",
+  "verksamhet": "Bolaget skall bedriva konsultativ verksamhet inom området energieffektivisering. Försäljning av värmepumpar, solceller, batterilösningar och laddboxar samt förenlig verksamhet.",
+  "sate": "Kristianstad",
+  "address": "Oxhagsvägen 19, 291 42 KRISTIANSTAD,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-08",
+  "emails": [
+    "kalla97@live.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Johan Lennart Kalla",
+      "role": "Styrelsesuppleant",
+      "personnr": "199706-XXXX"
+    },
+    {
+      "name": "Elin Astrid Linnéa Kalla",
+      "role": "Styrelsesuppleant",
+      "personnr": "200307-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "johankalla.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "johankalla.com",
+        "source": "generated"
+      },
+      {
+        "domain": "johankalla.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "johankallaab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Johan Kalla AB",
+    "searches": [
+      {
+        "query": "Johan Kalla AB hemsida website",
+        "summary": "Här är den officiella informationen om Johan Kalla AB:\n\n- Johan Kalla AB är ett aktiebolag med organisationsnummer 559567‑9795. Företaget har säte i Kristianstad, på adress Oxhagsvägen 19, 291 42 Kristianstad. Det registrerades hos Bolagsverket den 19 januari 2026, och bolagsordningen är daterad 8 december 2025 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679795-Johan_Kalla_AB?utm_source=openai)).\n\n- Bolaget bedriver konsultativ verksamhet inom energieffektivisering, samt försäljning av värm",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679795-Johan_Kalla_AB?utm_source=openai",
+            "title": "Johan Kalla AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Johan Kalla AB Bolaget skall bedriva konsultativ verksamhet inom  kontakt",
+        "summary": "Här är en kortfattad beskrivning av Johan Kalla AB baserat på registrerad information:\n\n- Johan Kalla AB (organisationsnummer 559567-9795) har sitt säte i Kristianstad, Skåne län. Bolaget bildades den 8 december 2025 och registrerades den 19 januari 2026 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679795-Johan_Kalla_AB?utm_source=openai)).  \n- Verksamhetsbeskrivningen lyder: \"Bolaget skall bedriva konsultativ verksamhet inom området energieffektivisering. Försäljning av värmepumpar, solcell",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679795-Johan_Kalla_AB?utm_source=openai",
+            "title": "Johan Kalla AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Johan Kalla AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "johankalla.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "johankalla.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:26:45.117308"
+  }
+}

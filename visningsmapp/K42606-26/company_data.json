@@ -1,0 +1,87 @@
+{
+  "folder": "K42606-26",
+  "extracted_at": "2026-01-21T20:18:58.257163",
+  "company_name": "Sparrsätra Bygg AB",
+  "orgnr": "559568-0314",
+  "verksamhet": "Företaget ska bedriva bygg-, snickeri- och entreprenadverksamhet, utföra nybyggnation, tillbyggnation, renovering och underhåll av fastigheter, bedriva projektledning samt uthyrning av personal och maskiner, samt därmed förenlig verksamhet.",
+  "sate": "Enköping",
+  "address": "c/o Fredrik Göran Juhlin, Sparrsätra Lönsåker 18, 745 95 ENKÖPING,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-10-09",
+  "emails": [
+    "fredrikjuhlinwow@hotmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Fredrik Göran Juhlin",
+      "role": "Styrelsesuppleant",
+      "personnr": "199405-XXXX"
+    },
+    {
+      "name": "Birgitta Elinor Marie Juhlin",
+      "role": "Styrelsesuppleant",
+      "personnr": "199206-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "sparrsatrabygg.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "sparrsatrabygg.com",
+        "source": "generated"
+      },
+      {
+        "domain": "sparrsatrabygg.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "sparrsatrabyggab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Sparrsätra Bygg AB",
+    "searches": [
+      {
+        "query": "Sparrsätra Bygg AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Sparrsätra Bygg AB Företaget ska bedriva bygg-, snickeri- och entrepr kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Sparrsätra Bygg AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "sparrsatrabygg.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "sparrsatrabygg.se",
+        "status": "timeout"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T21:00:24.660752"
+  }
+}

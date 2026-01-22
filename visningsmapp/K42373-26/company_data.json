@@ -1,0 +1,109 @@
+{
+  "folder": "K42373-26",
+  "extracted_at": "2026-01-21T20:18:58.195155",
+  "company_name": "AEJE CONSULTING AB",
+  "orgnr": "559567-9845",
+  "verksamhet": "Bolagets verksamhet skall bestå av att äga och förvalta värdepapper, äga och förvalta fast och lös egendom samt därmed förenlig verksamhet.",
+  "sate": "Vilhelmina",
+  "address": "Alexander Eriksson, Bergbackavägen 9, 912 34 VILHELMINA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-18",
+  "emails": [
+    "alexander@hallstaberget.se"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Victor Alexander Eriksson",
+      "role": "Styrelsesuppleant",
+      "personnr": "198810-XXXX"
+    },
+    {
+      "name": "Nils Erik Melker Eriksson",
+      "role": "Styrelsesuppleant",
+      "personnr": "195601-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "hallstaberget.se",
+    "confidence": 0.85,
+    "source": "email",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "aejeconsulting.se",
+        "source": "generated"
+      },
+      {
+        "domain": "aejeconsulting.com",
+        "source": "generated"
+      },
+      {
+        "domain": "aejeconsulting.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "direct",
+  "research": {
+    "company": "AEJE CONSULTING AB",
+    "searches": [
+      {
+        "query": "AEJE CONSULTING AB hemsida website",
+        "summary": "Jag hittade ingen officiell webbplats (hemsida) för AEJE CONSULTING AB vid sökning. Det verkar som att bolaget ännu inte har publicerat någon egen hemsida.\n\nDet som finns tillgängligt är information via företagsregister såsom Bolagsfakta, där följande uppgifter framgår:\n- Organisationsnummer: 559567‑9845  \n- Adress: c/o Alexander Eriksson, Bergbackavägen 9, 912 34 Vilhelmina, Västerbottens län  \n- Bolaget registrerades den 19 januari 2026 och bildades den 18 december 2025  \n- Verksamhetsbeskrivn",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai",
+            "title": "AEJE CONSULTING AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "AEJE CONSULTING AB Bolagets verksamhet skall bestå av att äga och för kontakt",
+        "summary": "Här är en kortfattad beskrivning av AEJE CONSULTING AB, baserat på officiella uppgifter:\n\n- AEJE CONSULTING AB har organisationsnummer 559567‑9845. Företaget har sitt säte i Vilhelmina, Västerbottens län, med adress Bergbackavägen 9, 912 34 Vilhelmina ([bolagsfakta.se](https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai)).\n- Bolaget registrerades hos Bolagsverket den 19 januari 2026 (firmanamn registrerat samma datum) och bildades genom bolagsordning från den 18 december 2",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai",
+            "title": "AEJE CONSULTING AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"AEJE CONSULTING AB\" site:se",
+        "summary": "Här är kort information om AEJE CONSULTING AB, baserat på information från svenska webbplatser:\n\nOrganisationsnummer: 559567‑9845 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai))  \nSäte: Vilhelmina i Västerbottens län ([bolagsfakta.se](https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai))  \nAdress: c/o Alexander Eriksson, Bergbackavägen 9, 912 34 Vilhelmina ([bolagsfakta.se](https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679845-AEJE_CONSULTING_AB?utm_source=openai",
+            "title": "AEJE CONSULTING AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "hallstaberget.se",
+        "confidence": 0.85
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "hallstaberget.se",
+        "url": "https://hallstaberget.se/",
+        "status": "no_match",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 0.0,
+        "title": "Hotell Hallstaberget | Hotell - Spa - Konferens",
+        "description": "Hotell Hallstaberget har sedan 1969 samlat friluftsmänniskor, nöjeslystna norrlänningar & kunskapstörstande konferensgäster.",
+        "text_sample": "Hotell Hallstaberget | Hotell - Spa - Konferens Hoppa till innehåll Presentkort Hitta hit Covid-19 Kundservice Boka rum Boka rum Boka rum Boka rum Boka rum Evenemang Köp presentkort Aktuellt Vinterrea! Spasemester Njut av god atmosfär, mat, bad & dryck. Spa, relax, frukost och en juvlig omgivning i den norrländska skogen. Pris från 995 kr Till paketet Pris från 995 kr Till paketet Vinterrea! Weekend-deal Två nätter till ett förmånligt pris med middag under båda kvällarna inkluderat. Spa, relax, "
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:22:40.595272"
+  }
+}

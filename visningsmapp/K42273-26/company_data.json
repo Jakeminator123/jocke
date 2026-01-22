@@ -1,0 +1,102 @@
+{
+  "folder": "K42273-26",
+  "extracted_at": "2026-01-21T20:18:58.183330",
+  "company_name": "Evergreen Publishing AB",
+  "orgnr": "559567-9316",
+  "verksamhet": "Företaget ska jobba med engelskspråkig bokutgivning online.",
+  "sate": "Nynäshamn",
+  "address": "Sjövägen 5, 148 96 SORUNDA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-18",
+  "emails": [
+    "henrikwdl@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Nils Henrik Widell",
+      "role": "Styrelseledamot",
+      "personnr": "197507-XXXX"
+    },
+    {
+      "name": "Susanne Marie Widell",
+      "role": "Styrelsesuppleant",
+      "personnr": "197209-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "evergreenpublishing.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "evergreenpublishing.com",
+        "source": "generated"
+      },
+      {
+        "domain": "evergreenpublishing.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "evergreenpublishingab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Evergreen Publishing AB",
+    "searches": [
+      {
+        "query": "Evergreen Publishing AB hemsida website",
+        "summary": "Här är information om Evergreen Publishing AB:\n\n• Evergreen Publishing AB är ett svenskt aktiebolag med organisationsnummer 559567‑9316, med säte i Nynäshamn, Stockholms län. Företagets adress är Sjövägen 5, 148 96 Sorunda ([bolagsfakta.se](https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai)).  \n• Bolaget registrerades hos Bolagsverket den 19 januari 2026, och bolagsordning dateras den 18 december 2025 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679316-Evergreen",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai",
+            "title": "Evergreen Publishing AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "Evergreen Publishing AB Företaget ska jobba med engelskspråkig bokutgivnin kontakt",
+        "summary": "Här är uppgifter om Evergreen Publishing AB, särskilt i samband med deras arbete med engelskspråkig bokutgivning:\n\n• Evergreen Publishing AB är ett aktiebolag med organisationsnummer 559567‑9316. Företaget har sitt säte i Nynäshamn, Stockholms län, och är registrerat på adressen Sjövägen 5, 148 96 Sorunda ([bolagsfakta.se](https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai)).  \n• Enligt Bolagsfakta ska bolaget arbeta med engelskspråkig bokutgivning online ([bolagsfak",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai",
+            "title": "Evergreen Publishing AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "\"Evergreen Publishing AB\" site:se",
+        "summary": "Här är information om Evergreen Publishing AB (noterat på .se-domänen):\n\n- Evergreen Publishing AB är ett svenskt aktiebolag med organisationsnummer 559567‑9316. Företaget har sitt säte i Nynäshamns kommun, Stockholms län och är registrerat på adressen Sjövägen 5, 148 96 Sorunda ([bolagsfakta.se](https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai)).\n- Bolaget bildades den 18 december 2025 och registrerades den 19 januari 2026 hos Bolagsverket ([bolagsfakta.se](https:",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679316-Evergreen_Publishing_AB?utm_source=openai",
+            "title": "Evergreen Publishing AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "evergreenpublishing.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "evergreenpublishing.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:20:41.620894"
+  }
+}

@@ -5,6 +5,13 @@ import { isAuthenticated } from "@/lib/auth";
 import Database from "better-sqlite3";
 import { parseExcelFile } from "@/lib/excel";
 import { getExistingDateDir } from "@/lib/data-paths";
+import {
+  normalizeCompanies,
+  normalizePeople,
+  calculateStats,
+  type NormalizedCompany,
+  type NormalizedPerson,
+} from "@/lib/normalize";
 
 export async function GET(
   request: NextRequest,
@@ -33,139 +40,127 @@ export async function GET(
       );
     }
 
+    // Priority: companies_*.db > data.db > final_*.xlsx > jocke.xlsx > kungorelser_*.xlsx
+    const companiesDbPath = join(dateDir, `companies_${date}.db`);
     const dbPath = join(dateDir, "data.db");
-    const excelPath = join(dateDir, `kungorelser_${date}.xlsx`);
+    const finalExcelPath = join(dateDir, `final_${date}.xlsx`);
     const jockePath = join(dateDir, "jocke.xlsx");
+    const excelPath = join(dateDir, `kungorelser_${date}.xlsx`);
 
-    // Try SQLite first, fallback to Excel
-    if (existsSync(dbPath)) {
-      return getDataFromSQLite(dbPath, date);
-    } else if (existsSync(jockePath) || existsSync(excelPath)) {
-      const filePath = existsSync(jockePath) ? jockePath : excelPath;
-      return await getDataFromExcel(filePath, date);
+    let companies: NormalizedCompany[] = [];
+    let people: NormalizedPerson[] = [];
+    let source = "unknown";
+
+    if (existsSync(companiesDbPath)) {
+      const result = getDataFromSQLite(companiesDbPath);
+      companies = result.companies;
+      people = result.people;
+      source = "sqlite";
+    } else if (existsSync(dbPath)) {
+      const result = getDataFromSQLite(dbPath);
+      companies = result.companies;
+      people = result.people;
+      source = "sqlite";
+    } else if (existsSync(finalExcelPath)) {
+      const result = await getDataFromExcel(finalExcelPath);
+      companies = result.companies;
+      people = result.people;
+      source = "excel-final";
+    } else if (existsSync(jockePath)) {
+      const result = await getDataFromExcel(jockePath);
+      companies = result.companies;
+      people = result.people;
+      source = "excel-jocke";
+    } else if (existsSync(excelPath)) {
+      const result = await getDataFromExcel(excelPath);
+      companies = result.companies;
+      people = result.people;
+      source = "excel-kungorelser";
     } else {
       return NextResponse.json(
         { error: "Data not found for this date" },
         { status: 404 }
       );
     }
+
+    const stats = calculateStats(companies, people);
+
+    return NextResponse.json({
+      date,
+      stats,
+      companies,
+      people,
+      source,
+    });
   } catch (error) {
     console.error("Error reading data:", error);
     return NextResponse.json({ error: "Failed to read data" }, { status: 500 });
   }
 }
 
-function getDataFromSQLite(dbPath: string, date: string) {
-  try {
-    const db = new Database(dbPath, { readonly: true });
+function getDataFromSQLite(dbPath: string): {
+  companies: NormalizedCompany[];
+  people: NormalizedPerson[];
+} {
+  const db = new Database(dbPath, { readonly: true });
 
-    // Get companies
-    const companies = db.prepare("SELECT * FROM companies").all();
+  // Get table names to handle different schemas
+  const tables = db
+    .prepare("SELECT name FROM sqlite_master WHERE type='table'")
+    .all() as { name: string }[];
+  const tableNames = tables.map((t) => t.name);
 
-    // Get people
-    const people = db.prepare("SELECT * FROM people").all();
+  let rawCompanies: Record<string, unknown>[] = [];
+  let rawPeople: Record<string, unknown>[] = [];
 
-    // Get company details
-    const companyDetails = db.prepare("SELECT * FROM company_details").all();
-
-    // Calculate stats
-    const stats = {
-      totalCompanies: companies.length,
-      totalPeople: people.length,
-      hasPeopleData: people.length > 0,
-      companiesWithDomain: companies.filter((c: any) => c.domain_verified === 1)
-        .length,
-      companiesWithEmail: companies.filter(
-        (c: any) => c.emails && c.emails.trim() !== ""
-      ).length,
-      companiesWithPhone: companies.filter((c: any) => c.phones_found > 0)
-        .length,
-      uniquePeople: new Set(
-        people.map((p: any) => p.personnummer).filter(Boolean)
-      ).size,
-      boardMembers: people.filter(
-        (p: any) =>
-          p.roll === "Styrelseledamot" || p.titel?.includes("Styrelseledamot")
-      ).length,
-      deputies: people.filter(
-        (p: any) =>
-          p.roll === "Styrelsesuppleant" ||
-          p.titel?.includes("Styrelsesuppleant")
-      ).length,
-      uniqueCities: new Set(people.map((p: any) => p.ort).filter(Boolean)).size,
-      segments: {} as Record<string, number>,
-    };
-
-    // Count segments
-    companies.forEach((c: any) => {
-      const segment = c.segment || "Unknown";
-      stats.segments[segment] = (stats.segments[segment] || 0) + 1;
-    });
-
-    db.close();
-
-    return NextResponse.json({
-      date,
-      stats,
-      sheets: {
-        Huvuddata: companies,
-        Personer: people,
-        CompanyDetails: companyDetails,
-      },
-      sheetNames: ["Huvuddata", "Personer", "CompanyDetails"],
-      source: "sqlite",
-    });
-  } catch (error: any) {
-    console.error("Error reading SQLite:", error);
-    throw error;
+  // Try different table names for companies
+  if (tableNames.includes("companies")) {
+    rawCompanies = db.prepare("SELECT * FROM companies").all() as Record<string, unknown>[];
   }
+
+  // Try different table names for people
+  if (tableNames.includes("people")) {
+    rawPeople = db.prepare("SELECT * FROM people").all() as Record<string, unknown>[];
+  } else if (tableNames.includes("personer")) {
+    rawPeople = db.prepare("SELECT * FROM personer").all() as Record<string, unknown>[];
+  }
+
+  db.close();
+
+  return {
+    companies: normalizeCompanies(rawCompanies),
+    people: normalizePeople(rawPeople),
+  };
 }
 
-async function getDataFromExcel(filePath: string, date: string) {
+async function getDataFromExcel(filePath: string): Promise<{
+  companies: NormalizedCompany[];
+  people: NormalizedPerson[];
+}> {
   const { sheets, sheetNames } = await parseExcelFile(filePath);
-  const mainSheetName = sheetNames[0];
-  const mainSheet = (mainSheetName ? sheets[mainSheetName] : []) as any[];
-  const peopleSheet = (sheets["Personer"] ?? []) as any[];
 
-  const stats = {
-    totalCompanies: mainSheet.length,
-    totalPeople: peopleSheet.length,
-    hasPeopleData: peopleSheet.length > 0,
-    companiesWithDomain: mainSheet.filter(
-      (c: any) => c.domain_verified === true || c.domain_verified === "true"
-    ).length,
-    companiesWithEmail: mainSheet.filter(
-      (c: any) => c["E-post"] && String(c["E-post"]).trim() !== ""
-    ).length,
-    companiesWithPhone: mainSheet.filter(
-      (c: any) => c.phones_found && Number(c.phones_found) > 0
-    ).length,
-    uniquePeople: new Set(
-      peopleSheet.map((p: any) => p.personnummer).filter(Boolean)
-    ).size,
-    boardMembers: peopleSheet.filter(
-      (p: any) =>
-        p.roll === "Styrelseledamot" || p.titel?.includes("Styrelseledamot")
-    ).length,
-    deputies: peopleSheet.filter(
-      (p: any) =>
-        p.roll === "Styrelsesuppleant" || p.titel?.includes("Styrelsesuppleant")
-    ).length,
-    uniqueCities: new Set(peopleSheet.map((p: any) => p.ort).filter(Boolean))
-      .size,
-    segments: {} as Record<string, number>,
+  // Find company data - try multiple sheet names
+  let rawCompanies: Record<string, unknown>[] = [];
+  const companySheetNames = ["Huvuddata", "Data", "Companies", sheetNames[0]];
+  for (const name of companySheetNames) {
+    if (name && sheets[name] && (sheets[name] as unknown[]).length > 0) {
+      rawCompanies = sheets[name] as Record<string, unknown>[];
+      break;
+    }
+  }
+
+  // Find people data
+  let rawPeople: Record<string, unknown>[] = [];
+  const peopleSheetNames = ["Personer", "People", "Styrelse"];
+  for (const name of peopleSheetNames) {
+    if (sheets[name] && (sheets[name] as unknown[]).length > 0) {
+      rawPeople = sheets[name] as Record<string, unknown>[];
+      break;
+    }
+  }
+
+  return {
+    companies: normalizeCompanies(rawCompanies),
+    people: normalizePeople(rawPeople),
   };
-
-  mainSheet.forEach((c: any) => {
-    const segment = c.Segment || "Unknown";
-    stats.segments[segment] = (stats.segments[segment] || 0) + 1;
-  });
-
-  return NextResponse.json({
-    date,
-    stats,
-    sheets,
-    sheetNames,
-    source: "excel",
-  });
 }

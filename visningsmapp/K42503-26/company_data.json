@@ -1,0 +1,85 @@
+{
+  "folder": "K42503-26",
+  "extracted_at": "2026-01-21T20:18:58.234155",
+  "company_name": "Carthago Digital AB",
+  "orgnr": "559568-0165",
+  "verksamhet": "Bolaget ska bedriva konsultverksamhet inom IT, digital utveckling, affärsstrategi, marknadsföring, projektledning, systemutveckling, webbutveckling, AI-lösningar och digital transformation. Bolaget ska även erbjuda tjänster inom design, analys, rådgivning och utveckling av digitala produkter samt därmed förenlig verksamhet.",
+  "sate": "Västerås",
+  "address": "Klockartorpsgatan 22A, 723 44 VÄSTERÅS,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-10",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Youssef Susaeg",
+      "role": "Styrelsesuppleant",
+      "personnr": "199706-XXXX"
+    },
+    {
+      "name": "Nour El Khouloud Susaeg Romdhani",
+      "role": "Styrelsesuppleant",
+      "personnr": "199904-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "carthagodigital.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "carthagodigital.com",
+        "source": "generated"
+      },
+      {
+        "domain": "carthagodigital.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "carthagodigitalab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Carthago Digital AB",
+    "searches": [
+      {
+        "query": "Carthago Digital AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Carthago Digital AB Bolaget ska bedriva konsultverksamhet inom IT, dig kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Carthago Digital AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "carthagodigital.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "carthagodigital.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:38:24.222480"
+  }
+}

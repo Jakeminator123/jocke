@@ -1,0 +1,83 @@
+{
+  "folder": "K42629-26",
+  "extracted_at": "2026-01-21T20:18:58.263783",
+  "company_name": "YeelenBa International AB",
+  "orgnr": "559568-0421",
+  "verksamhet": "Filmproduktion - Filmdistribution - Filmvisning - Föreläsningar om filmer och afrikansk kultur - Organisering av konserter och teaterföreställningar - Marknadsföring och försäljning av konstnärliga och hantverksmässiga produkter från Afrika. Målgrupp: Biografer, Tv-kanaler, Skolor, Kommuner, Teatrar, Butiker, Samhället via internet.",
+  "sate": "Uppsala",
+  "address": "Dani Kouyate, Opalvägen 8 LGH 1004, 752 69 UPPSALA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-11",
+  "emails": [
+    "danikouyate@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Dani Mohamed Kouyate",
+      "role": "Styrelseledamot",
+      "personnr": "196106-XXXX"
+    },
+    {
+      "name": "Miguel Sotigui Timothée Kouyate",
+      "role": "Styrelsesuppleant",
+      "personnr": "200002-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "yeelenbainternational.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "yeelenbainternational.com",
+        "source": "generated"
+      },
+      {
+        "domain": "yeelenbainternational.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "YeelenBa International AB",
+    "searches": [
+      {
+        "query": "YeelenBa International AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "YeelenBa International AB Filmproduktion - Filmdistribution - Filmvisning -  kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"YeelenBa International AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "yeelenbainternational.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "yeelenbainternational.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T21:07:52.790270"
+  }
+}

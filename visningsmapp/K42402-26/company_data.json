@@ -1,0 +1,140 @@
+{
+  "folder": "K42402-26",
+  "extracted_at": "2026-01-21T20:18:58.210759",
+  "company_name": "ByCare Företagshälsa i Jämtland AB",
+  "orgnr": "559567-9597",
+  "verksamhet": "Bedriva företagshälsa och utbildning inom hälsa samt handel med värdepapper samt därmed förenlig verksamhet.",
+  "sate": "Östersund",
+  "address": "831 39 ÖSTERSUND,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-16",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Yvonne Veronica Westberg",
+      "role": "Styrelseledamot",
+      "personnr": "197105-XXXX"
+    },
+    {
+      "name": "Roger Tonie Jäderberg",
+      "role": "Styrelseledamot",
+      "personnr": "197305-XXXX"
+    },
+    {
+      "name": "Inga Nilsson",
+      "role": "Styrelseledamot",
+      "personnr": "195612-XXXX"
+    },
+    {
+      "name": "Jim Eddi Hansson",
+      "role": "Styrelseledamot",
+      "personnr": "198806-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "bycare.se",
+    "confidence": 1.0,
+    "source": "ai_crawled",
+    "status": "wrong_company",
+    "alternatives": [
+      {
+        "domain": "bycareforetagshalsaijamtland.com",
+        "source": "generated"
+      },
+      {
+        "domain": "bycareforetagshalsaijamtland.nu",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "ByCare Företagshälsa i Jämtland AB",
+    "searches": [
+      {
+        "query": "ByCare Företagshälsa i Jämtland AB hemsida website",
+        "summary": "Här är information om hemsidan för ByCare Företagshälsa i Jämtland AB:\n\n- Det finns för närvarande ingen separat, officiell hemsida för ByCare Företagshälsa i Jämtland AB. Företaget är nystartat (registrerat den 19 januari 2026) och det främsta befintliga digitala spåret för ByCare är deras svenska bolag, ByCare Företagshälsa i Sverige AB, med hemsida: bycare.se ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai)).\n\nK",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          },
+          {
+            "url": "https://www.bolagsfakta.se/5595679597-ByCare_Foretagshalsa_i_Jamtland_AB?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      },
+      {
+        "query": "ByCare Företagshälsa i Jämtland AB Bedriva företagshälsa och utbildning inom hälsa sa kontakt",
+        "summary": "Här är kontaktuppgifter och kort information om ByCare Företagshälsa i Jämtland AB:\n\n- Verksamheten bedrivs i Östersund med postadress 831 39 Östersund ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai)).  \n- Företaget är ett aktiebolag med organisationsnummer 559567‑9597, registrerat 2026‑01‑19. Det verkar med syftet att bedriva företagshälsa och utbildning inom hälsa, samt handel med värdepapper ([kreditrapporten.s",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          },
+          {
+            "url": "https://www.bolagsfakta.se/5595679597-ByCare_Foretagshalsa_i_Jamtland_AB?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB | Aktiebolag | Info & Löner"
+          },
+          {
+            "url": "https://bycare.se/kontakta-oss/?utm_source=openai",
+            "title": "Kontakta oss - ByCare"
+          }
+        ]
+      },
+      {
+        "query": "\"ByCare Företagshälsa i Jämtland AB\" site:se",
+        "summary": "Här är kort information om “ByCare Företagshälsa i Jämtland AB”:\n\n- ByCare Företagshälsa i Jämtland AB är ett aktiebolag med organisationsnummer 559567‑9597, registrerat och aktivt sedan den 19 januari 2026. Bolaget har sitt säte i Östersunds kommun och har ett aktiekapital på 25 000 SEK ([kreditrapporten.se](https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai)).\n\n- Verksamhetsbeskrivningen lyder: \"Bedriva företagshälsa och utbildning inom ",
+        "sources": [
+          {
+            "url": "https://kreditrapporten.se/kreditupplysning/5595679597/bycare-foretagshalsa-i-jamtland-ab?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB - se information och ta kreditupplysning | Kreditrapporten.se"
+          },
+          {
+            "url": "https://www.bolagsfakta.se/5595679597-ByCare_Foretagshalsa_i_Jamtland_AB?utm_source=openai",
+            "title": "ByCare Företagshälsa i Jämtland AB | Aktiebolag | Info & Löner"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "bycare.se",
+        "confidence": 0.85
+      },
+      {
+        "domain": "bycareforetagshalsaijamtland.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "bycare.se",
+        "url": "https://bycare.se/",
+        "status": "wrong_company",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 1.0,
+        "title": "ByCare – Din partner inom företagshälsa & arbetsmiljö",
+        "description": "Företagshälsa med fokus på arbetsmiljö, hälsokontroller och rehabilitering. ByCare hjälper företag i hela Sverige skapa hållbara arbetsplatser.",
+        "text_sample": "ByCare – Din partner inom företagshälsa & arbetsmiljö Företagshälsa på väg till er Vår målsättning är att göra det enkelt för er. Därför kommer vi ut till företaget och erbjuder våra tjänster direkt på plats – så att medarbetarna slipper resa till en mottagning. Ett förebyggande – hållbart – klimatsmart och mer lönsamt alternativ i arbetet med att skapa en friskare arbetsplats. Kontakta oss Jag vill veta mer Välkommen till en partner som sätter relationen först ByCare grundades med en vision att",
+        "ai_verified": false,
+        "ai_confidence": 0.7,
+        "ai_reason": "Hemsidan bycare.se nämner inte specifikt ByCare Företagshälsa i Jämtland AB eller dess organisationsnummer. Även om verksamheten och fokus på företagshälsa stämmer överens, finns det ingen direkt koppling till staden Östersund eller det specifika företaget som nämns i uppgifterna."
+      },
+      {
+        "domain": "bycareforetagshalsaijamtland.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:24:51.222609"
+  }
+}

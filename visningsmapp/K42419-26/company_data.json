@@ -1,0 +1,142 @@
+{
+  "folder": "K42419-26",
+  "extracted_at": "2026-01-21T20:18:58.215786",
+  "company_name": "The Code Clinic AB",
+  "orgnr": "559567-9704",
+  "verksamhet": "Bolaget ska utveckla, implementera och förvalta digitala lösningar, mjukvaror och applikationer. Därutöver kan bolaget även tillhandahålla konsulttjänster inom IT och medicin. Bolaget kan även äga och förvalta fast och lös egendom, inklusive värdepapper, och därmed förenlig verksamhet.",
+  "sate": "Varberg",
+  "address": "Brearedsvägen 33, 432 38 VARBERG,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-13",
+  "emails": [
+    "fredrikjunerfalt@gmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "John Marcus Danielsson",
+      "role": "Styrelseledamot",
+      "personnr": "199108-XXXX"
+    },
+    {
+      "name": "Lars Fredrik Junerfält",
+      "role": "Styrelseledamot",
+      "personnr": "198909-XXXX"
+    },
+    {
+      "name": "Viktoria Anna Julia Junerfält",
+      "role": "Styrelsesuppleant",
+      "personnr": "199201-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "codeclinic.us",
+    "confidence": 1.0,
+    "source": "ai_crawled",
+    "status": "wrong_company",
+    "alternatives": [
+      {
+        "domain": "thecodeclinic.com",
+        "source": "generated"
+      },
+      {
+        "domain": "thecodeclinic.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "thecodeclinicab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "The Code Clinic AB",
+    "searches": [
+      {
+        "query": "The Code Clinic AB hemsida website",
+        "summary": "Jag hittade ingen hemsida med exakt namnet \"The Code Clinic AB\". Däremot finns det ett svenskt aktiebolag med det juridiska namnet The Code Clinic AB, med organisationsnummer 559567‑9704, registrerat i Varberg, Sverige. Bolaget är nybildat, registrerat den 19 januari 2026, och bedriver verksamhet inom utveckling, implementering och förvaltning av digitala lösningar samt konsulttjänster inom IT och medicin ([bolagsfakta.se](https://www.bolagsfakta.se/5595679704-The_Code_Clinic_AB?utm_source=opena",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679704-The_Code_Clinic_AB?utm_source=openai",
+            "title": "The Code Clinic AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          },
+          {
+            "url": "https://www.signalhire.com/companies/code-clinic-pvt-ltd?utm_source=openai",
+            "title": "Code Clinic Pvt. Ltd. Information | SignalHire Company Profile"
+          },
+          {
+            "url": "https://www.codeclinic.us/?utm_source=openai",
+            "title": "Web, Mobile App, SEO & Cyber Security Experts - Code Clinic"
+          }
+        ]
+      },
+      {
+        "query": "The Code Clinic AB Bolaget ska utveckla, implementera och förvalta di kontakt",
+        "summary": "Här är en kort och tydlig beskrivning av vad bolaget (The Code Clinic AB) ska göra enligt registrerad verksamhetsbeskrivning hos Bolagsverket:\n\nThe Code Clinic AB ska:\n\n• ut­veckla, implementera och förvalta digitala lösningar, mjukvaror och applikationer  \n• tillhandahålla konsulttjänster inom IT och medicin  \n• äga och förvalta fast och lös egendom, inklusive värdepapper, samt bedriva därmed förenlig verksamhet ([bolagsfakta.se](https://www.bolagsfakta.se/5595679704-The_Code_Clinic_AB?utm_sour",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679704-The_Code_Clinic_AB?utm_source=openai",
+            "title": "The Code Clinic AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"The Code Clinic AB\" site:se",
+        "summary": "Här är en kort beskrivning av företaget \"The Code Clinic AB\" baserad på information från en svensk källa:\n\nThe Code Clinic AB är ett aktiebolag med organisationsnummer 559567‑9704 och är registrerat i Varberg, Hallands län. Företaget bildades den 13 december 2025 och registrerades officiellt den 19 januari 2026. Det har sitt säte på Brearedsvägen 33, 432 38 Varberg. VD är Marcus Danielsson och styrelseordförande är Fredrik Junerfält. verksamheten ska enligt registreringen omfatta utveckling, imp",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679704-The_Code_Clinic_AB?utm_source=openai",
+            "title": "The Code Clinic AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "signalhire.com",
+        "confidence": 0.5
+      },
+      {
+        "domain": "codeclinic.us",
+        "confidence": 0.5
+      },
+      {
+        "domain": "thecodeclinic.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "signalhire.com",
+        "status": "error",
+        "http_code": 403
+      },
+      {
+        "domain": "codeclinic.us",
+        "url": "https://www.codeclinic.us/",
+        "status": "wrong_company",
+        "is_parked": false,
+        "is_match": false,
+        "match_ratio": 1.0,
+        "title": "Web, Mobile App, SEO & Cyber Security Experts - Code Clinic",
+        "description": "Build powerful websites, mobile apps, and secure online stores with Code Clinic. We offer expert web & app development, SEO, cyber security, and Shopify services.",
+        "text_sample": "Web, Mobile App, SEO & Cyber Security Experts - Code Clinic Office Address 3473 North 1st Street, San Jose, CA, San Jose, California 95134 Phone Number +91 +19294033333 Email Address [email protected] Your Digital Growth Catalyst Leading Mobile & Web Development Company We specialize in transformative mobile and web development, Growing Businesses Through Digital Transformation. Book Your Discovery Call Now Why Us Collaborating with Leading Web Development and Digital Agencies 100% Project Trans",
+        "ai_verified": false,
+        "ai_confidence": 0.9,
+        "ai_reason": "Hemsidan codeclinic.us är baserad i San Jose, Kalifornien och fokuserar på webbutveckling, mobilappar, SEO och cybersäkerhet. Det finns ingen koppling till Varberg eller den specifika verksamhetsbeskrivningen för The Code Clinic AB i Sverige. Det verkar vara ett annat företag med ett liknande namn."
+      },
+      {
+        "domain": "thecodeclinic.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:25:42.171458"
+  }
+}

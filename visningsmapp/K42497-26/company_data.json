@@ -1,0 +1,87 @@
+{
+  "folder": "K42497-26",
+  "extracted_at": "2026-01-21T20:18:58.230767",
+  "company_name": "Josef Khan Taxi AB",
+  "orgnr": "559568-0181",
+  "verksamhet": "Taxi verksamhet",
+  "sate": "Göteborg",
+  "address": "Norra fjädermolnsgatan 24, 418 42 GÖTEBORG,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-21",
+  "emails": [
+    "khanjosef@hotmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Josef Ahmad Khan",
+      "role": "Styrelseledamot",
+      "personnr": "197111-XXXX"
+    },
+    {
+      "name": "Naseer Ahmad Wasim",
+      "role": "Styrelsesuppleant",
+      "personnr": "196006-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "josefkhantaxi.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "josefkhantaxi.com",
+        "source": "generated"
+      },
+      {
+        "domain": "josefkhantaxi.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "josefkhantaxiab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Josef Khan Taxi AB",
+    "searches": [
+      {
+        "query": "Josef Khan Taxi AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Josef Khan Taxi AB Taxi verksamhet kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Josef Khan Taxi AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "josefkhantaxi.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "josefkhantaxi.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:34:45.188313"
+  }
+}

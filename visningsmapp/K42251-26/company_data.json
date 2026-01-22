@@ -1,0 +1,100 @@
+{
+  "folder": "K42251-26",
+  "extracted_at": "2026-01-21T20:18:58.179509",
+  "company_name": "Linnéa Borg AB",
+  "orgnr": "559567-9779",
+  "verksamhet": "Bolagets verksamhet är att bedriva konsultation inom administration och därmed förenlig verksamhet. Bolaget skall också förvalta aktier och andelar samt bedriva kapitalförvaltning.",
+  "sate": "Mark",
+  "address": "c/o Borg, Ramdalsvägen 24, 511 69 SÄTILA,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-22",
+  "emails": [],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Annika Linnéa Borg",
+      "role": "Styrelsesuppleant",
+      "personnr": "197802-XXXX"
+    },
+    {
+      "name": "Karl Anders Jonas Borg",
+      "role": "Styrelsesuppleant",
+      "personnr": "197902-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "linnéaborg.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "linnéaborg.com",
+        "source": "generated"
+      },
+      {
+        "domain": "linnéaborg.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "linnéaborgab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "unknown",
+  "research": {
+    "company": "Linnéa Borg AB",
+    "searches": [
+      {
+        "query": "Linnéa Borg AB hemsida website",
+        "summary": "Jag hittade ingen officiell hemsida (hemsida) för Linnéa Borg AB. Företaget listas däremot i företagsdatabaser och har följande information:\n\n• Organisationsnummer: 559567‑9779  \n• Adress: c/o Borg, Ramdalsvägen 24, 511 69 Sätila, Sverige ([bolagsfakta.se](https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai))  \n• Bolaget är aktivt och registrerades den 19 januari 2026 med verksamhet inom konsultation inom administration, kapitalförvaltning och förvaltning av aktier och andelar",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai",
+            "title": "Linnéa Borg AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "Linnéa Borg AB Bolagets verksamhet är att bedriva konsultation in kontakt",
+        "summary": "Här är en kortfattad beskrivning av verksamheten för **Linnéa Borg AB**:\n\nBolagets verksamhet är att bedriva konsultation inom administration och därmed förenlig verksamhet. Dessutom ska bolaget förvalta aktier och andelar samt bedriva kapitalförvaltning. ([bolagsfakta.se](https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai))\n\nOm du vill ha ytterligare information som organisationsnummer, adress eller bolagsbildningsdatum är det bara att säga till!",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai",
+            "title": "Linnéa Borg AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      },
+      {
+        "query": "\"Linnéa Borg AB\" site:se",
+        "summary": "Här är en kort sammanfattning av bolaget **Linnéa Borg AB**, baserat på tillgänglig information:\n\n• **Organisationsnummer:** 559567‑9779 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai))  \n• **Registrering:** Bolaget bildades den 22 december 2025 och registrerades hos Bolagsverket den 19 januari 2026 ([bolagsfakta.se](https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai))  \n• **Säte och adress:** Säte i Mark kommun, Västra Götalands län.",
+        "sources": [
+          {
+            "url": "https://www.bolagsfakta.se/5595679779-Linnea_Borg_AB?utm_source=openai",
+            "title": "Linnéa Borg AB | Aktiebolag | Info & Löner - Bolagsfakta"
+          }
+        ]
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "linnéaborg.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "linnéaborg.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:20:08.163358"
+  }
+}

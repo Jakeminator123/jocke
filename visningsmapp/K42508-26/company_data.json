@@ -1,0 +1,87 @@
+{
+  "folder": "K42508-26",
+  "extracted_at": "2026-01-21T20:18:58.235835",
+  "company_name": "Carl Åborg Music AB",
+  "orgnr": "559568-0090",
+  "verksamhet": "Musik och ljudproduktion. Fonogramutgivning samt närliggande verksamhet.",
+  "sate": "Stockholm",
+  "address": "Lundagatan 33, 2 tr, 117 27 STOCKHOLM,",
+  "typ": "Privat aktiebolag",
+  "bildat": "2025-12-17",
+  "emails": [
+    "carlaborg@hotmail.com"
+  ],
+  "phones": [
+    "0771-670 670"
+  ],
+  "people": [
+    {
+      "name": "Carl Niklas Egen Åborg",
+      "role": "Styrelsesuppleant",
+      "personnr": "198010-XXXX"
+    },
+    {
+      "name": "Maria Anna Margareta Brander",
+      "role": "Styrelsesuppleant",
+      "personnr": "198002-XXXX"
+    }
+  ],
+  "domain": {
+    "guess": "carlaborgmusic.se",
+    "confidence": 0.4,
+    "source": "company_name",
+    "status": "unknown",
+    "alternatives": [
+      {
+        "domain": "carlaborgmusic.com",
+        "source": "generated"
+      },
+      {
+        "domain": "carlaborgmusic.nu",
+        "source": "generated"
+      },
+      {
+        "domain": "carlaborgmusicab.se",
+        "source": "generated"
+      }
+    ]
+  },
+  "skip_company": false,
+  "skip_reason": "",
+  "email_category": "generic",
+  "research": {
+    "company": "Carl Åborg Music AB",
+    "searches": [
+      {
+        "query": "Carl Åborg Music AB hemsida website",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "Carl Åborg Music AB Musik och ljudproduktion. Fonogramutgivning samt n kontakt",
+        "summary": "",
+        "sources": []
+      },
+      {
+        "query": "\"Carl Åborg Music AB\" site:se",
+        "summary": "",
+        "sources": []
+      }
+    ],
+    "domain_candidates": [
+      {
+        "domain": "carlaborgmusic.se",
+        "confidence": 0.4
+      }
+    ],
+    "crawl_results": [
+      {
+        "domain": "carlaborgmusic.se",
+        "status": "connection_error"
+      }
+    ],
+    "best_domain": null,
+    "best_confidence": 0.0,
+    "researched_at": "2026-01-21T20:40:27.325762"
+  }
+}
