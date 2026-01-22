@@ -369,6 +369,9 @@ function StatCard({ icon: Icon, label, value }: { icon: React.ElementType; label
 }
 
 function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
+  const params = useParams();
+  const date = params.date as string;
+  
   if (companies.length === 0) {
     return <EmptyState message="Inga företag matchar din sökning" />;
   }
@@ -392,7 +395,12 @@ function CompaniesTable({ companies }: { companies: NormalizedCompany[] }) {
             {companies.slice(0, 100).map((company, idx) => (
               <tr key={idx} className="hover:bg-zinc-800/50 transition-colors">
                 <td className="px-4 py-3">
-                  <div className="font-medium">{company.foretagsnamn}</div>
+                  <Link 
+                    href={`/date/${date}/company/${company.mapp}`}
+                    className="font-medium text-blue-400 hover:text-blue-300 hover:underline"
+                  >
+                    {company.foretagsnamn}
+                  </Link>
                   <div className="text-xs text-zinc-500">{company.mapp}</div>
                 </td>
                 <td className="px-4 py-3 font-mono text-zinc-400">{company.orgnr}</td>
