@@ -131,11 +131,11 @@ export function indexDateData(date: string, data: NormalizedData): void {
   const db = ensureIndexDb();
   const now = new Date().toISOString();
 
-  const deleteByDate = db.prepare("DELETE FROM companies WHERE date = ?").run.bind(db);
-  const deletePeople = db.prepare("DELETE FROM people WHERE date = ?").run.bind(db);
-  const deleteMails = db.prepare("DELETE FROM mails WHERE date = ?").run.bind(db);
-  const deleteAudits = db.prepare("DELETE FROM audits WHERE date = ?").run.bind(db);
-  const deleteEvaluations = db.prepare("DELETE FROM evaluations WHERE date = ?").run.bind(db);
+  const deleteByDate = db.prepare("DELETE FROM companies WHERE date = ?");
+  const deletePeople = db.prepare("DELETE FROM people WHERE date = ?");
+  const deleteMails = db.prepare("DELETE FROM mails WHERE date = ?");
+  const deleteAudits = db.prepare("DELETE FROM audits WHERE date = ?");
+  const deleteEvaluations = db.prepare("DELETE FROM evaluations WHERE date = ?");
 
   const insertCompany = db.prepare(`
     INSERT INTO companies (
@@ -190,11 +190,11 @@ export function indexDateData(date: string, data: NormalizedData): void {
   `);
 
   const transaction = db.transaction(() => {
-    deleteByDate(date);
-    deletePeople(date);
-    deleteMails(date);
-    deleteAudits(date);
-    deleteEvaluations(date);
+    deleteByDate.run(date);
+    deletePeople.run(date);
+    deleteMails.run(date);
+    deleteAudits.run(date);
+    deleteEvaluations.run(date);
 
     data.companies.forEach((company) => {
       insertCompany.run({
