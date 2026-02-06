@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Dataflode enkel">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7aa2f7"/>
+    </marker>
+    <style>
+      .bg { fill: #0b0f14; }
+      .box { fill: #141a21; stroke: #2a3440; stroke-width: 1.2; rx: 10; ry: 10; }
+      .text { fill: #e5e7eb; font-family: Arial, sans-serif; font-size: 16px; }
+      .arrow { stroke: #7aa2f7; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="260"/>
+
+  <rect class="box" x="20" y="90" width="120" height="60"/>
+  <text class="text" x="80" y="125" text-anchor="middle">ZIP</text>
+
+  <rect class="box" x="170" y="90" width="140" height="60"/>
+  <text class="text" x="240" y="125" text-anchor="middle">Packas upp</text>
+
+  <rect class="box" x="340" y="90" width="160" height="60"/>
+  <text class="text" x="420" y="125" text-anchor="middle">Filer (xlsx/db)</text>
+
+  <rect class="box" x="540" y="40" width="120" height="60"/>
+  <text class="text" x="600" y="75" text-anchor="middle">Excel</text>
+
+  <rect class="box" x="540" y="140" width="120" height="60"/>
+  <text class="text" x="600" y="175" text-anchor="middle">SQLite</text>
+
+  <rect class="box" x="700" y="90" width="140" height="60"/>
+  <text class="text" x="770" y="125" text-anchor="middle">Normalisera</text>
+
+  <rect class="box" x="870" y="90" width="140" height="60"/>
+  <text class="text" x="940" y="125" text-anchor="middle">Lanka ihop</text>
+
+  <rect class="box" x="1040" y="90" width="120" height="60"/>
+  <text class="text" x="1100" y="125" text-anchor="middle">API / Sajt</text>
+
+  <line class="arrow" x1="140" y1="120" x2="170" y2="120"/>
+  <line class="arrow" x1="310" y1="120" x2="340" y2="120"/>
+
+  <line class="arrow" x1="500" y1="120" x2="540" y2="70"/>
+  <line class="arrow" x1="500" y1="120" x2="540" y2="170"/>
+
+  <line class="arrow" x1="660" y1="70" x2="700" y2="120"/>
+  <line class="arrow" x1="660" y1="170" x2="700" y2="120"/>
+
+  <line class="arrow" x1="840" y1="120" x2="870" y2="120"/>
+  <line class="arrow" x1="1010" y1="120" x2="1040" y2="120"/>
+</svg>
