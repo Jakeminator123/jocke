@@ -18,6 +18,9 @@ export function isIndexAvailable(): boolean {
   return existsSync(getIndexDbPath());
 }
 
+// Schema version - bump this to force a full re-index when schema changes
+const SCHEMA_VERSION = 2;
+
 export function ensureIndexDb() {
   const baseDir = getIndexBaseDir();
   if (!existsSync(baseDir)) {
@@ -28,7 +31,14 @@ export function ensureIndexDb() {
   db.pragma("journal_mode = WAL");
   db.pragma("synchronous = NORMAL");
 
+  // Check if schema migration is needed
+  migrateIfNeeded(db);
+
   db.exec(`
+    CREATE TABLE IF NOT EXISTS _schema_version (
+      version INTEGER PRIMARY KEY
+    );
+
     CREATE TABLE IF NOT EXISTS indexed_dates (
       date TEXT PRIMARY KEY,
       updated_at TEXT
@@ -60,6 +70,11 @@ export function ensureIndexDb() {
       orgnr TEXT,
       roll TEXT,
       personnummer TEXT,
+      fornamn TEXT,
+      mellannamn TEXT,
+      efternamn TEXT,
+      adress TEXT,
+      postnummer TEXT,
       ort TEXT,
       search_text TEXT
     );
@@ -124,7 +139,55 @@ export function ensureIndexDb() {
     CREATE INDEX IF NOT EXISTS idx_evaluations_mapp ON evaluations(mapp);
   `);
 
+  // Store current schema version
+  db.exec(`INSERT OR REPLACE INTO _schema_version (version) VALUES (${SCHEMA_VERSION})`);
+
   return db;
+}
+
+/**
+ * Checks the stored schema version and drops all tables if outdated.
+ * This forces a full re-index from source data on the next API call.
+ */
+function migrateIfNeeded(db: Database.Database) {
+  try {
+    // Check if _schema_version table exists
+    const tableExists = db.prepare(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='_schema_version'"
+    ).get();
+
+    if (!tableExists) {
+      // No version table = old schema, need full rebuild
+      console.log("[INDEX] No schema version found - rebuilding index with new schema");
+      dropAllTables(db);
+      return;
+    }
+
+    const row = db.prepare("SELECT version FROM _schema_version LIMIT 1").get() as { version: number } | undefined;
+    const currentVersion = row?.version ?? 0;
+
+    if (currentVersion < SCHEMA_VERSION) {
+      console.log(`[INDEX] Schema version ${currentVersion} -> ${SCHEMA_VERSION} - rebuilding index`);
+      dropAllTables(db);
+    }
+  } catch {
+    // If anything goes wrong reading version, rebuild to be safe
+    console.log("[INDEX] Error reading schema version - rebuilding index");
+    dropAllTables(db);
+  }
+}
+
+function dropAllTables(db: Database.Database) {
+  db.exec(`
+    DROP TABLE IF EXISTS companies;
+    DROP TABLE IF EXISTS people;
+    DROP TABLE IF EXISTS mails;
+    DROP TABLE IF EXISTS audits;
+    DROP TABLE IF EXISTS evaluations;
+    DROP TABLE IF EXISTS indexed_dates;
+    DROP TABLE IF EXISTS _schema_version;
+  `);
+  console.log("[INDEX] All index tables dropped - will re-index from source data");
 }
 
 export function indexDateData(date: string, data: NormalizedData): void {
@@ -151,9 +214,11 @@ export function indexDateData(date: string, data: NormalizedData): void {
 
   const insertPerson = db.prepare(`
     INSERT INTO people (
-      date, mapp, kungorelse_id, foretagsnamn, orgnr, roll, personnummer, ort, search_text
+      date, mapp, kungorelse_id, foretagsnamn, orgnr, roll, personnummer,
+      fornamn, mellannamn, efternamn, adress, postnummer, ort, search_text
     ) VALUES (
-      @date, @mapp, @kungorelse_id, @foretagsnamn, @orgnr, @roll, @personnummer, @ort, @search_text
+      @date, @mapp, @kungorelse_id, @foretagsnamn, @orgnr, @roll, @personnummer,
+      @fornamn, @mellannamn, @efternamn, @adress, @postnummer, @ort, @search_text
     )
   `);
 
@@ -216,6 +281,7 @@ export function indexDateData(date: string, data: NormalizedData): void {
           company.foretagsnamn,
           company.orgnr,
           company.mapp,
+          company.sate,
           company.segment,
           company.lan,
           company.epost,
@@ -234,6 +300,11 @@ export function indexDateData(date: string, data: NormalizedData): void {
         orgnr: person.orgnr || "",
         roll: person.roll || "",
         personnummer: person.personnummer || "",
+        fornamn: person.fornamn || "",
+        mellannamn: person.mellannamn || "",
+        efternamn: person.efternamn || "",
+        adress: person.adress || "",
+        postnummer: person.postnummer || "",
         ort: person.ort || "",
         search_text: buildSearchText([
           person.fornamn,

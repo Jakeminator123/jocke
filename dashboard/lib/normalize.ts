@@ -232,7 +232,7 @@ const MAIL_FIELD_MAP: Record<string, keyof NormalizedMail> = {
   "mail_content": "mail_content",
   "cost_sek": "cost_sek",
   "domain_status": "domain_status",
-  "main_status": "mail_status",
+  "mail_status": "mail_status",
   "site_preview_url": "site_preview_url",
   "audit_note": "audit_note",
   // Swedish alternatives

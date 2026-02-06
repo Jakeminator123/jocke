@@ -1,43 +1,59 @@
 # Dependencies
 node_modules/
-.pnp/
-.pnp.js
+**/node_modules/
 
-# Build
+# Next.js build
 .next/
+**/.next/
 out/
-build/
-dist/
 
-# Environment
+# Environment files
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# Data (stored separately)
-data_input/
-data_bundles/
-
-# Test/temp JSON files
-*.json
-!package.json
-!package-lock.json
-!tsconfig.json
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
-.idea/
+# IDE / Editor
+.cursor/
 .vscode/
 *.swp
 *.swo
 
-# OS
-.DS_Store
+# OS files
 Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Data directories (generated/uploaded - not source code)
+data_input/
+data_bundles/
+
+# ZIP archives (large binary files)
+*.zip
+**/*.zip
+
+# SQLite databases (generated index)
+_index.sqlite
+*.sqlite
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Build / cache
+dist/
+.turbo/
+.cache/
+.vercel/
+coverage/
+
+# Cursor exports
+cursor_exports_*/
 
 # Misc
-*.log
+*.png.bak
+preprompt_history.json
