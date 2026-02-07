@@ -15,7 +15,8 @@ import {
   FolderArchive,
   Trash2,
   AlertTriangle,
-  RefreshCw
+  RefreshCw,
+  Settings
 } from "lucide-react";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
@@ -159,6 +160,13 @@ export default function HomePage() {
           <p className="text-zinc-400 mt-1">Sök och utforska företagsdata från kungörelser</p>
         </div>
         <div className="flex gap-3">
+          <button
+            onClick={() => router.push("/config")}
+            className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
+          >
+            <Settings className="w-4 h-4" />
+            Inställningar
+          </button>
           <button 
             onClick={handleDownloadAll}
             className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
